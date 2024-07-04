@@ -1,0 +1,61 @@
+<nav class="border-b-2 border-gray-200 px-6">
+  <div class="flex flex-wrap justify-between items-center">
+    <div class="flex items-center space-x-4">
+      <figure class="w-20">
+        <a routerLink="/">
+          <img src="/assets/logo/images/logo-gradient-neutral-trello.png" alt="logo trello">
+        </a>
+      </figure>
+      <div class="flex items-center">
+        <ul class="flex items-center space-x-2 text-sm font-semibold text-gray-600">
+          <li class="p-2">
+            <a href="#" class="hover:bg-gray-300 py-1 px-2 rounded flex items-center space-x-1">
+              <span>Espacios de trabajo</span>
+              <img class="w-4 h-4 -rotate-90" src="/assets/icons/svg/arrow-icon.svg" alt="arrow">
+            </a>
+          </li>
+          <li class="p-2">
+            <a href="#" class="hover:bg-gray-300 py-1 px-2 rounded flex items-center space-x-1">
+              <span>Reciente</span>
+              <img class="w-4 h-4 -rotate-90" src="/assets/icons/svg/arrow-icon.svg" alt="arrow">
+            </a>
+          </li>
+          <li class="p-2">
+            <a href="#" class="hover:bg-gray-300 py-1 px-2 rounded flex items-center space-x-1">
+              <span>Marcado</span>
+              <img class="w-4 h-4 -rotate-90" src="/assets/icons/svg/arrow-icon.svg" alt="arrow">
+            </a>
+          </li>
+          <li class="p-2">
+            <a href="#" class="hover:bg-gray-300 py-1 px-2 rounded flex items-center space-x-1">
+              <span>Platillas</span>
+              <img class="w-4 h-4 -rotate-90" src="/assets/icons/svg/arrow-icon.svg" alt="arrow">
+            </a>
+          </li>
+          <li class="p-1">
+            <app-btn [typeBtn]="'button'" [color]="'primary'">Crear</app-btn>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="flex items-center space-x-4">
+      <button>
+        <img class="w-5 h-5" src="/assets/icons/svg/bell-icon.svg" alt="notifications" >
+      </button>
+      <button>
+        <img class="w-5 h-5" src="/assets/icons/svg/help-icon.svg" alt="help">
+      </button>
+      <button
+        type="button"
+        class="flex rounded-full"
+        aria-expanded="false"
+      >
+        <img
+          class="w-6 h-6 rounded-full"
+          src="https://picsum.photos/400/400"
+          alt="user photo"
+        />
+      </button>
+    </div>
+  </div>
+</nav>
