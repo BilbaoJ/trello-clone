@@ -3,33 +3,66 @@
     <div class="flex items-center space-x-4">
       <figure class="w-20">
         <a routerLink="/">
-          <img src="/assets/logo/images/logo-gradient-neutral-trello.png" alt="logo trello">
+          <img
+            src="/assets/logo/images/logo-gradient-neutral-trello.png"
+            alt="logo trello"
+          />
         </a>
       </figure>
       <div class="flex items-center">
-        <ul class="flex items-center space-x-2 text-base font-semibold text-gray-600">
+        <ul
+          class="flex items-center space-x-2 text-base font-semibold text-gray-600"
+        >
           <li class="p-2">
-            <a href="#" class="hover:bg-gray-300 py-1 px-2 rounded flex items-center space-x-1">
+            <a
+              href="#"
+              class="hover:bg-gray-300 py-1 px-2 rounded flex items-center space-x-1"
+            >
               <span>Espacios de trabajo</span>
-              <img class="w-4 h-4 -rotate-90" src="/assets/icons/svg/arrow-icon.svg" alt="arrow">
+              <img
+                class="w-4 h-4 -rotate-90"
+                src="/assets/icons/svg/arrow-icon.svg"
+                alt="arrow"
+              />
             </a>
           </li>
           <li class="p-2">
-            <a href="#" class="hover:bg-gray-300 py-1 px-2 rounded flex items-center space-x-1">
+            <a
+              href="#"
+              class="hover:bg-gray-300 py-1 px-2 rounded flex items-center space-x-1"
+            >
               <span>Reciente</span>
-              <img class="w-4 h-4 -rotate-90" src="/assets/icons/svg/arrow-icon.svg" alt="arrow">
+              <img
+                class="w-4 h-4 -rotate-90"
+                src="/assets/icons/svg/arrow-icon.svg"
+                alt="arrow"
+              />
             </a>
           </li>
           <li class="p-2">
-            <a href="#" class="hover:bg-gray-300 py-1 px-2 rounded flex items-center space-x-1">
+            <a
+              href="#"
+              class="hover:bg-gray-300 py-1 px-2 rounded flex items-center space-x-1"
+            >
               <span>Marcado</span>
-              <img class="w-4 h-4 -rotate-90" src="/assets/icons/svg/arrow-icon.svg" alt="arrow">
+              <img
+                class="w-4 h-4 -rotate-90"
+                src="/assets/icons/svg/arrow-icon.svg"
+                alt="arrow"
+              />
             </a>
           </li>
           <li class="p-2">
-            <a href="#" class="hover:bg-gray-300 py-1 px-2 rounded flex items-center space-x-1">
-              <span>Platillas</span>
-              <img class="w-4 h-4 -rotate-90" src="/assets/icons/svg/arrow-icon.svg" alt="arrow">
+            <a
+              href="#"
+              class="hover:bg-gray-300 py-1 px-2 rounded flex items-center space-x-1"
+            >
+              <span>Plantillas</span>
+              <img
+                class="w-4 h-4 -rotate-90"
+                src="/assets/icons/svg/arrow-icon.svg"
+                alt="arrow"
+              />
             </a>
           </li>
           <li class="p-1">
@@ -40,15 +73,22 @@
     </div>
     <div class="flex items-center space-x-4">
       <button>
-        <img class="w-5 h-5" src="/assets/icons/svg/bell-icon.svg" alt="notifications" >
+        <img
+          class="w-5 h-5"
+          src="/assets/icons/svg/bell-icon.svg"
+          alt="notifications"
+        />
       </button>
       <button>
-        <img class="w-5 h-5" src="/assets/icons/svg/help-icon.svg" alt="help">
+        <img class="w-5 h-5" src="/assets/icons/svg/help-icon.svg" alt="help" />
       </button>
       <button
         type="button"
         class="flex rounded-full"
         aria-expanded="false"
+        (click)="isOpen = !isOpen"
+        cdkOverlayOrigin
+        #menuOverlay="cdkOverlayOrigin"
       >
         <img
           class="w-6 h-6 rounded-full"
@@ -59,3 +99,90 @@
     </div>
   </div>
 </nav>
+<ng-template
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="menuOverlay"
+  [cdkConnectedOverlayOpen]="isOpen"
+>
+  <section class="flex flex-col items-start divide-y divide-gray-300 w-80 rounded shadow-lg mt-4 py-3 px-4 border border-gray-200 text-blue-950">
+    <div class="flex flex-col space-y-4 w-full py-3 px-4">
+      <span class="font-bold text-gray-500 text-xs my-2">CUENTA</span>
+      <div class="flex flex-col space-y-4">
+        <header class="flex space-x-4">
+          <figure class="w-12 h-12">
+            <img class="rounded-full" src="https://picsum.photos/400/400" alt="user photo">
+          </figure>
+          <div class="flex flex-col">
+            <p class="text-base">Jessica Bilbao</p>
+            <p class="text-sm text-gray-600">jessi&commat;email.com</p>
+          </div>
+        </header>
+        <div>
+          <ul class="flex flex-col space-y-4">
+            <li>
+              <a href="#" class="block">Cambiar cuentas</a>
+            </li>
+            <li>
+              <a href="#" class="flex items-center justify-between">
+                <span>Gestionar cuenta</span>
+                <img src="/assets/icons/svg/open-icon.svg" alt="open" class="w-5 h-5">
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="py-3 px-4 w-full">
+      <span class="font-bold text-gray-500 text-xs my-2">TRELLO</span>
+      <div class="pt-3">
+        <ul class="flex flex-col space-y-4">
+          <li>
+            <a href="#" class="block">Perfil y visibilidad</a>
+          </li>
+          <li>
+            <a href="#" class="block">Actividad</a>
+          </li>
+          <li>
+            <a href="#" class="block">Tarjetas</a>
+          </li>
+          <li>
+            <a href="#" class="block">Ajustes</a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center justify-between">
+              <span>Tema</span>
+              <img src="/assets/icons/svg/arrow-icon.svg" alt="arrow" class="w-5 h-5 rotate-180">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="py-3 px-4 w-full">
+      <ul class="flex flex-col space-y-4">
+        <li>
+          <a href="#" class="flex items-center space-x-2">
+            <img src="/assets/icons/svg/team-icon.svg" alt="workspace" class="w-5 h-5">
+            <span>Crear Espacio de trabajo</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="py-3 px-4 w-full">
+      <ul class="flex flex-col space-y-4">
+        <li>
+          <a href="#" class="block">Ayuda</a>
+        </li>
+        <li>
+          <a href="#" class="block">Accesos directos</a>
+        </li>
+      </ul>
+    </div>
+    <div class="py-3 px-4 w-full">
+      <ul>
+        <li>
+          <a href="#" class="block">Cerrar sesión</a>
+        </li>
+      </ul>
+    </div>
+  </section>
+</ng-template>
