@@ -25,15 +25,54 @@
     </div>
     <div class="flex flex-col px-3 py-4 w-full space-y-2">
       <span class="text-xs font-medium text-gray-600">Espacios de trabajo</span>
-      <button class="flex justify-between hover:bg-gray-300 p-2 rounded-lg">
-        <div class="flex space-x-2 items-center">
-          <figure class="w-6 h-6">
-            <img class="rounded" src="https://picsum.photos/400/400" alt="user photo">
-          </figure>
-          <span class="text-sm font-medium text-gray-700">My workspace</span>
-        </div>
-        <fa-icon class="text-gray-600" [icon]="faChevronDown"></fa-icon>
-      </button>
+      <cdk-accordion>
+        <cdk-accordion-item #accordionMenu="cdkAccordionItem">
+          <button (click)="accordionMenu.toggle()" class="flex justify-between w-full hover:bg-gray-300 p-2 rounded-lg">
+            <div class="flex space-x-2 items-center">
+              <figure class="w-6 h-6">
+                <img class="rounded" src="https://picsum.photos/400/400" alt="user photo">
+              </figure>
+              <span class="text-sm font-medium text-gray-700">My workspace</span>
+            </div>
+            <fa-icon class="text-gray-600" [icon]="accordionMenu.expanded ? faChevronUp : faChevronDown"></fa-icon>
+          </button>
+          <div [style.display]="accordionMenu.expanded ? '' : 'none' ">
+            <ul class="flex flex-col space-y-2 text-sm text-gray-600">
+              <li>
+                <a href="#" class="flex space-x-2 pl-8 py-1 hover:bg-gray-300 rounded">
+                  <fa-icon [icon]="faTrello"></fa-icon>
+                  <span>Tableros</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="flex space-x-2 pl-8 py-1 hover:bg-gray-300 rounded">
+                  <fa-icon [icon]="faHeart"></fa-icon>
+                  <span>Lo más destacado</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="flex items-center space-x-2 pl-8 py-1 hover:bg-gray-300 rounded">
+                  <img class="w-4 h-4" src="/assets/icons/svg/grid-icon.svg" alt="grid">
+                  <span>Vistas</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="flex space-x-2 pl-8 py-1 hover:bg-gray-300 rounded">
+                  <fa-icon [icon]="faUser"></fa-icon>
+                  <span>Miembros</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="flex space-x-2 pl-8 py-1 hover:bg-gray-300 rounded">
+                  <fa-icon [icon]="faGear"></fa-icon>
+                  <span>Configuración</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </cdk-accordion-item>
+      </cdk-accordion>
+
     </div>
   </section>
   <section class="flex flex-col items-start w-3/5 px-8 space-y-16">
