@@ -1,2 +1,131 @@
 <app-navbar></app-navbar>
-<h1>Board page</h1>
+<main class="container flex px-4 mt-8 justify-center pb-8">
+  <section class="flex flex-col w-1/6 items-start divide-y divide-gray-300">
+    <div class="flex flex-col w-full py-2">
+      <ul class="text-gray-700 font-medium text-sm flex flex-col space-y-2">
+        <li class="rounded-lg py-2 px-3 hover:bg-gray-300">
+          <a class="flex space-x-4 items-center">
+            <fa-icon [icon]="faTrello"></fa-icon>
+            <span>Tableros</span>
+          </a>
+        </li>
+        <li class="rounded-lg py-2 px-3 hover:bg-gray-300">
+          <a class="flex space-x-3 items-center">
+            <img src="/assets/icons/svg/template-icon.svg" class="w-4 h-4" alt="template">
+            <span>Plantillas</span>
+          </a>
+        </li>
+        <li class="rounded-lg py-2 px-3 hover:bg-gray-300">
+          <a class="flex space-x-4 items-center ">
+            <fa-icon [icon]="faWaveSquare"></fa-icon>
+            <span>Inicio</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="flex flex-col px-3 py-4 w-full space-y-2">
+      <span class="text-xs font-medium text-gray-600">Espacios de trabajo</span>
+      <button class="flex justify-between hover:bg-gray-300 p-2 rounded-lg">
+        <div class="flex space-x-2 items-center">
+          <figure class="w-6 h-6">
+            <img class="rounded" src="https://picsum.photos/400/400" alt="user photo">
+          </figure>
+          <span class="text-sm font-medium text-gray-700">My workspace</span>
+        </div>
+        <fa-icon class="text-gray-600" [icon]="faChevronDown"></fa-icon>
+      </button>
+    </div>
+  </section>
+  <section class="flex flex-col items-start w-3/5 px-8 space-y-16">
+    <div>
+      <div class="flex items-center space-x-4">
+        <fa-icon class="text-gray-500 text-xl" [icon]="faClock"></fa-icon>
+        <h1 class="text-base font-bold tracking-wide text-blue-950">Visto recientemente</h1>
+      </div>
+      <div class="grid grid-flow-col gap-4 pt-4">
+        <div class="rounded bg-purple-500 h-24 w-48 p-2">
+          <span class="text-white font-bold">Proyecto 1</span>
+        </div>
+        <div class="rounded bg-purple-500 h-24 w-48 p-2">
+          <span class="text-white font-bold">Proyecto 2</span>
+        </div>
+      </div>
+    </div>
+    <div class="w-full">
+      <h1 class="uppercase text-gray-500 font-bold tracking-wide">Tus espacios de trabajo</h1>
+      <header class="flex justify-between pt-4 items-center">
+        <div class="flex space-x-2 items-center">
+          <figure class="w-8 h-8">
+            <img class="rounded" src="https://picsum.photos/400/400" alt="user photo">
+          </figure>
+          <span class="text-sm font-bold text-gray-700">My workspace</span>
+        </div>
+        <div>
+          <ul class="flex space-x-6 items-center text-gray-700 text-sm font-semibold">
+            <li>
+              <a class="flex space-x-2 hover:bg-gray-300 p-2 rounded">
+                <fa-icon [icon]="faTrello"></fa-icon>
+                <span>Tableros</span>
+              </a>
+            </li>
+            <li>
+              <a class="flex items-center space-x-2 hover:bg-gray-300 p-2 rounded">
+                <img class="w-4 h-4" src="/assets/icons/svg/grid-icon.svg" alt="grid">
+                <span>Vistas</span>
+              </a>
+            </li>
+            <li>
+              <a class="flex space-x-2 hover:bg-gray-300 p-2 rounded">
+                <fa-icon [icon]="faUser"></fa-icon>
+                <span>Miembros</span>
+              </a>
+            </li>
+            <li>
+              <a class="flex space-x-2 hover:bg-gray-300 p-2 rounded">
+                <fa-icon [icon]="faGear"></fa-icon>
+                <span>Configuración</span>
+              </a>
+            </li>
+            <li>
+              <a class="flex space-x-2 hover:bg-purple-200 p-2 rounded">
+                <fa-icon class="text-white bg-purple-700 px-1 rounded" [icon]="faBriefcase"></fa-icon>
+                <span class="text-gray-500 font-normal">Cambiar Plan</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </header>
+      <div class="flex flex-col items-start">
+        <div class="grid grid-flow-col gap-4 pt-4">
+          <div class="rounded bg-purple-500 h-24 w-48 p-2">
+            <span class="text-white font-bold">Proyecto 1</span>
+          </div>
+          <div class="flex items-center justify-center rounded h-24 w-48 p-2 hover:bg-gray-300">
+            <span class="text-gray-600 text-sm">Crear tablero nuevo</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="flex space-x-4 items-center">
+        <h1 class="uppercase text-gray-500 font-bold tracking-wide">Espacios de trabajo en los que eres invitado</h1>
+        <fa-icon class="text-gray-500 border-2 border-gray-500 rounded-full w-4 h-4 text-xs flex items-center justify-center" [icon]="faInfo"></fa-icon>
+      </div>
+      <div class="flex flex-col items-start">
+        <div class="grid grid-flow-col gap-4 pt-4">
+          <div class="flex flex-col space-y-4">
+            <header class="flex space-x-2 items-center">
+              <figure class="w-8 h-8">
+                <img class="rounded" src="https://picsum.photos/400/400?random=1" alt="user photo">
+              </figure>
+              <span class="text-sm font-bold text-gray-700">Otra persona</span>
+            </header>
+            <div class="rounded bg-purple-500 h-24 w-48 p-2">
+              <span class="text-white font-bold">Proyecto 2</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
