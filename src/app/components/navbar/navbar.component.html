@@ -1,52 +1,57 @@
-<nav class="border-b-2 border-gray-200 px-6">
+<nav class="border-b-2 border-gray-200 px-6" [ngClass] = "bgColors">
   <div class="flex flex-wrap justify-between items-center">
     <div class="flex items-center space-x-4">
       <figure class="w-20">
         <a routerLink="/">
           <img
-            src="/assets/logo/images/logo-gradient-neutral-trello.png"
+            [src]="logo"
             alt="logo trello"
           />
         </a>
       </figure>
       <div class="flex items-center">
         <ul
-          class="flex items-center space-x-2 text-sm font-semibold text-gray-600"
+          class="flex items-center space-x-2 text-sm font-semibold"
+          [ngClass] = "colorText"
         >
           <li class="p-2">
             <a
               href="#"
-              class="hover:bg-gray-300 py-1 px-2 rounded flex items-center space-x-1"
+              class="py-1 px-2 rounded flex items-center space-x-1"
+              [ngClass] = "hover"
             >
               <span>Espacios de trabajo</span>
-              <fa-icon class="text-gray-600" [icon]="faChevronDown"></fa-icon>
+              <fa-icon [ngClass] = "colorText" [icon]="faChevronDown"></fa-icon>
             </a>
           </li>
           <li class="p-2">
             <a
               href="#"
-              class="hover:bg-gray-300 py-1 px-2 rounded flex items-center space-x-1"
+              class="py-1 px-2 rounded flex items-center space-x-1"
+              [ngClass] = "hover"
             >
               <span>Reciente</span>
-              <fa-icon class="text-gray-600" [icon]="faChevronDown"></fa-icon>
+              <fa-icon [ngClass] = "colorText" [icon]="faChevronDown"></fa-icon>
             </a>
           </li>
           <li class="p-2">
             <a
               href="#"
-              class="hover:bg-gray-300 py-1 px-2 rounded flex items-center space-x-1"
+              class="py-1 px-2 rounded flex items-center space-x-1"
+              [ngClass] = "hover"
             >
               <span>Marcado</span>
-              <fa-icon class="text-gray-600" [icon]="faChevronDown"></fa-icon>
+              <fa-icon [ngClass] = "colorText" [icon]="faChevronDown"></fa-icon>
             </a>
           </li>
           <li class="p-2">
             <a
               href="#"
-              class="hover:bg-gray-300 py-1 px-2 rounded flex items-center space-x-1"
+              class="py-1 px-2 rounded flex items-center space-x-1"
+              [ngClass] = "hover"
             >
               <span>Plantillas</span>
-              <fa-icon class="text-gray-600" [icon]="faChevronDown"></fa-icon>
+              <fa-icon [ngClass] = "colorText" [icon]="faChevronDown"></fa-icon>
             </a>
           </li>
           <li class="p-1">
@@ -57,14 +62,10 @@
     </div>
     <div class="flex items-center space-x-4">
       <button type="button">
-        <img
-          class="w-5 h-5"
-          src="/assets/icons/svg/bell-icon.svg"
-          alt="notifications"
-        />
+        <fa-icon [ngClass]="colorText" [icon]="faBell"></fa-icon>
       </button>
       <button>
-        <img class="w-5 h-5" src="/assets/icons/svg/help-icon.svg" alt="help" />
+        <fa-icon [ngClass]="colorText" [icon]="faCircleQuestion"></fa-icon>
       </button>
       <button
         type="button"
