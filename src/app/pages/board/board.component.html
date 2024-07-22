@@ -1,0 +1,120 @@
+<div class="flex flex-col h-screen">
+  <app-navbar bgColor="blue" textColor="white" logoColor="white"></app-navbar>
+  <div class="flex justify-between py-4 px-8 bg-gradient-to-r from-blue-700 to-sky-700">
+    <div class="flex space-x-4 justify-center items-center">
+      <h2 class="text-lg font-bold text-white">Prueba</h2>
+      <button class=" hover:bg-blue-600 px-2 py-1 rounded flex items-center">
+        <fa-icon [icon]="faStar" class="text-white text-xs"></fa-icon>
+      </button>
+      <button class="hover:bg-blue-600 px-2 py-1 rounded flex items-center">
+        <fa-icon [icon]="faLock" class="text-white text-xs"></fa-icon>
+      </button>
+      <button class="px-4 py-1 rounded flex items-center space-x-2 text-blue-900 bg-white">
+        <fa-icon [icon]="faChartSimple" class=" text-xs rotate-180"></fa-icon>
+        <span class="font-medium text-sm">Tablero</span>
+      </button>
+      <button class="hover:bg-blue-600 px-2 py-1 rounded flex items-center">
+        <fa-icon [icon]="faChevronDown" class="text-white"></fa-icon>
+      </button>
+    </div>
+    <div class="flex space-x-4">
+      <button class="hover:bg-blue-500 px-2 py-1 rounded flex items-center text-white text-xs">
+        <fa-icon [icon]="faRocket"></fa-icon>
+      </button>
+      <button class="hover:bg-blue-500 px-2 py-1 rounded flex items-center text-white text-xs">
+        <fa-icon [icon]="faBoltLightning"></fa-icon>
+      </button>
+      <button class="hover:bg-blue-500 px-2 py-1 rounded flex items-center space-x-2 text-white text-xs">
+        <fa-icon [icon]="faFilter"></fa-icon>
+        <span class="font-medium text-sm">Filtros</span>
+      </button>
+      <button>
+        <img
+          class="w-6 h-6 rounded-full"
+          src="https://picsum.photos/400/400"
+          alt="user photo"
+        />
+      </button>
+      <button class="px-2 py-1 rounded flex items-center space-x-2 text-blue-900 text-xs bg-white">
+        <fa-icon [icon]="faUserPlus"></fa-icon>
+        <span class="font-medium text-sm">Compartir</span>
+      </button>
+      <button class="hover:bg-blue-500 px-2 py-1 rounded flex items-center space-x-2 text-white">
+        <fa-icon [icon]="faEllipsis"></fa-icon>
+      </button>
+    </div>
+  </div>
+  <div class="w-full grow bg-gradient-to-r from-blue-500 to-cyan-500 px-4 pb-4">
+    <div class="flex items-start w-full h-full my-4">
+      <div class="rounded-xl bg-gray-200 w-72 p-2 mr-3">
+        <div class="flex justify-between py-1">
+          <h3 class="text-sm font-bold ml-2">To Do</h3>
+        </div>
+
+        <div class="text-sm mt-2"
+          cdkDropList
+          (cdkDropListDropped)="drop($event)"
+          >
+          @for (task of tasks; track $index) {
+            <div
+              cdkDrag
+              class="bg-white shadow p-2 rounded mt-2 border-b border-x-gray-300 cursor-pointer hover:bg-gray-400"
+            >
+
+              {{ task.title }}
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="rounded-xl bg-gray-200 w-72 p-2 mr-3">
+        <div class="flex justify-between py-1">
+          <h3 class="text-sm font-bold ml-2">Doing</h3>
+        </div>
+
+        <div class="text-sm mt-2">
+          <div
+            class="bg-white shadow p-2 rounded mt-2 border-b border-x-gray-300 cursor-pointer hover:bg-gray-400"
+          >
+            Task 1
+          </div>
+          <div
+            class="bg-white shadow p-2 rounded mt-2 border-b border-x-gray-300 cursor-pointer hover:bg-gray-400"
+          >
+            Task 2
+          </div>
+          <div
+            class="bg-white shadow p-2 rounded mt-2 border-b border-x-gray-300 cursor-pointer hover:bg-gray-400"
+          >
+            Task 3
+          </div>
+        </div>
+      </div>
+
+      <div class="rounded-xl bg-gray-200 w-72 p-2 mr-3">
+        <div class="flex justify-between py-1">
+          <h3 class="text-sm font-bold ml-2">Done</h3>
+        </div>
+
+        <div class="text-sm mt-2">
+          <div
+            class="bg-white shadow p-2 rounded mt-2 border-b border-x-gray-300 cursor-pointer hover:bg-gray-400"
+          >
+            Task 1
+          </div>
+          <div
+            class="bg-white shadow p-2 rounded mt-2 border-b border-x-gray-300 cursor-pointer hover:bg-gray-400"
+          >
+            Task 2
+          </div>
+          <div
+            class="bg-white shadow p-2 rounded mt-2 border-b border-x-gray-300 cursor-pointer hover:bg-gray-400"
+          >
+            Task 3
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

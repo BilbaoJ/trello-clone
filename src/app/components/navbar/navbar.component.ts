@@ -35,7 +35,8 @@ export class NavbarComponent {
   get bgColors(){
     return {
       'bg-white': this.bgColor === 'white',
-      'bg-primary-600': this.bgColor === 'blue',
+      'bg-primary-800': this.bgColor === 'blue',
+      'border-b-2 border-gray-200': this.bgColor === "white"
     };
   }
 
