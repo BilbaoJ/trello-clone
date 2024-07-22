@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
-import { DragDropModule, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { DragDropModule, CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ToDo } from '../../models/todo.model';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faStar, faLock, faChartSimple, faChevronDown,
@@ -38,9 +38,17 @@ export class BoardComponent {
       id: '2',
       title: 'Task 2'
     },
+  ];
+  doing: ToDo[] = [
     {
       id: '3',
       title: 'Task 3'
+    }
+  ];
+  done: ToDo[] = [
+    {
+      id: '4',
+      title: 'Task 4'
     }
   ];
 
@@ -54,7 +62,18 @@ export class BoardComponent {
   faUserPlus = faUserPlus;
   faEllipsis = faEllipsis;
 
-  drop(event: CdkDragDrop<any[]>){
-    moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
+  drop(event: CdkDragDrop<ToDo[]>){
+    if (event.previousContainer  === event.container) {
+      moveItemInArray(event.container.data,
+                      event.previousIndex,
+                      event.currentIndex
+                    );
+    }else{
+      transferArrayItem(event.previousContainer.data,
+                        event.container.data,
+                        event.previousIndex,
+                        event.currentIndex
+                      );
+    }
   }
 }
