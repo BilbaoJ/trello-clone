@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { DragDropModule, CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
@@ -30,7 +30,7 @@ import { Column } from '../../models/column.model';
 })
 export class BoardComponent {
 
-  columns: Column[] =[
+  columns = signal<Column[]>([
     {
       title: 'ToDo',
       tasks: [
@@ -62,11 +62,7 @@ export class BoardComponent {
         }
       ]
     }
-  ];
-
-  tasks: ToDo[] = [];
-  doing: ToDo[] = [];
-  done: ToDo[] = [];
+  ]);
 
   faStar = faStar;
   faLock = faLock;
@@ -95,9 +91,10 @@ export class BoardComponent {
   }
 
   addColumn(){
-    this.columns.push({
+    const newColumn = {
       title: 'Nueva lista',
       tasks: []
-    });
+    };
+    this.columns.update((columns) =>[...columns, newColumn]);
   }
 }
