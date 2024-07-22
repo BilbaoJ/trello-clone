@@ -90,6 +90,10 @@ export class BoardComponent {
     }
   }
 
+  dropColumn(event: CdkDragDrop<Column[]>){
+    moveItemInArray(this.columns(), event.previousIndex, event.currentIndex);
+  }
+
   addColumn(){
     const newColumn = {
       title: 'Nueva lista',

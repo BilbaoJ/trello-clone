@@ -45,9 +45,14 @@
     </div>
   </div>
   <div class="w-full grow bg-gradient-to-r from-blue-500 to-cyan-500 px-4 pb-4">
-    <div class="flex items-start w-full h-full my-4 overflow-x-scroll" cdkDropListGroup>
+    <div class="flex items-start w-full h-full my-4 overflow-x-scroll"
+      cdkDropListGroup
+      cdkDropList
+      cdkDropListOrientation="horizontal"
+      (cdkDropListDropped)="dropColumn($event)"
+    >
       @for (column of columns(); track $index) {
-        <div class="rounded-xl bg-gray-200 w-72 p-2 mr-3 shrink-0">
+        <div class="rounded-xl bg-gray-200 w-72 p-2 mr-3 shrink-0" cdkDrag>
           <div class="flex justify-between py-1">
             <h3 class="text-sm font-semibold ml-2 text-gray-700">{{ column.title }}</h3>
           </div>
