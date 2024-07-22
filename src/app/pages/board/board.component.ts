@@ -6,7 +6,8 @@ import { ToDo } from '../../models/todo.model';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faStar, faLock, faChartSimple, faChevronDown,
           faRocket, faBoltLightning, faFilter, faUserPlus,
-            faEllipsis} from '@fortawesome/free-solid-svg-icons';
+            faEllipsis, faPlus} from '@fortawesome/free-solid-svg-icons';
+import { Column } from '../../models/column.model';
 
 @Component({
   selector: 'app-board',
@@ -29,28 +30,43 @@ import { faStar, faLock, faChartSimple, faChevronDown,
 })
 export class BoardComponent {
 
-  tasks: ToDo[] = [
+  columns: Column[] =[
     {
-      id: '1',
-      title: 'Task 1'
+      title: 'ToDo',
+      tasks: [
+        {
+          id: '1',
+          title: 'Task 1'
+        },
+        {
+          id: '2',
+          title: 'Task 2'
+        },
+      ]
     },
     {
-      id: '2',
-      title: 'Task 2'
+      title: 'Doing',
+      tasks: [
+        {
+          id: '3',
+          title: 'Task 3'
+        }
+      ]
     },
-  ];
-  doing: ToDo[] = [
     {
-      id: '3',
-      title: 'Task 3'
+      title: 'Done',
+      tasks: [
+        {
+          id: '4',
+          title: 'Task 4'
+        }
+      ]
     }
   ];
-  done: ToDo[] = [
-    {
-      id: '4',
-      title: 'Task 4'
-    }
-  ];
+
+  tasks: ToDo[] = [];
+  doing: ToDo[] = [];
+  done: ToDo[] = [];
 
   faStar = faStar;
   faLock = faLock;
@@ -61,6 +77,7 @@ export class BoardComponent {
   faFilter = faFilter;
   faUserPlus = faUserPlus;
   faEllipsis = faEllipsis;
+  faPlus = faPlus;
 
   drop(event: CdkDragDrop<ToDo[]>){
     if (event.previousContainer  === event.container) {
@@ -75,5 +92,12 @@ export class BoardComponent {
                         event.currentIndex
                       );
     }
+  }
+
+  addColumn(){
+    this.columns.push({
+      title: 'Nueva lista',
+      tasks: []
+    });
   }
 }

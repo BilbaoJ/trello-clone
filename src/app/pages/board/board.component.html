@@ -45,72 +45,36 @@
     </div>
   </div>
   <div class="w-full grow bg-gradient-to-r from-blue-500 to-cyan-500 px-4 pb-4">
-    <div class="flex items-start w-full h-full my-4" cdkDropListGroup>
-      <div class="rounded-xl bg-gray-200 w-72 p-2 mr-3">
-        <div class="flex justify-between py-1">
-          <h3 class="text-sm font-bold ml-2">To Do</h3>
-        </div>
+    <div class="flex items-start w-full h-full my-4 overflow-x-scroll" cdkDropListGroup>
+      @for (column of columns; track $index) {
+        <div class="rounded-xl bg-gray-200 w-72 p-2 mr-3 shrink-0">
+          <div class="flex justify-between py-1">
+            <h3 class="text-sm font-semibold ml-2 text-gray-700">{{ column.title }}</h3>
+          </div>
 
-        <div class="text-sm mt-2 min-h-[2.5rem]"
-          cdkDropList
-          (cdkDropListDropped)="drop($event)"
-          [cdkDropListData]="tasks"
-          >
-          @for (task of tasks; track $index) {
-            <div
-              cdkDrag
-              class="bg-white shadow p-2 rounded mt-2 border-b border-x-gray-300 cursor-pointer hover:bg-gray-400"
+          <div class="text-sm mt-2 min-h-[2.5rem]"
+            cdkDropList
+            (cdkDropListDropped)="drop($event)"
+            [cdkDropListData]="column.tasks"
             >
+            @for (task of column.tasks; track $index) {
+              <div
+                cdkDrag
+                class="bg-white shadow p-2 rounded mt-2 border-b border-x-gray-300 cursor-pointer hover:bg-gray-400"
+              >
 
-              {{ task.title }}
-            </div>
-          }
+                {{ task.title }}
+              </div>
+            }
+          </div>
         </div>
-      </div>
-
-      <div class="rounded-xl bg-gray-200 w-72 p-2 mr-3">
-        <div class="flex justify-between py-1">
-          <h3 class="text-sm font-bold ml-2">Doing</h3>
+      }
+      <button class="rounded-xl w-72 px-4 py mr-3 shrink-0 bg-primary-300/50 text-white" (click)="addColumn()">
+        <div class="flex justify-start items-center">
+          <fa-icon [icon]="faPlus"></fa-icon>
+          <span class="text-sm font-bold ml-2">Añade otra lista</span>
         </div>
-
-        <div class="text-sm mt-2 min-h-[2.5rem]"
-          cdkDropList
-          (cdkDropListDropped)="drop($event)"
-          [cdkDropListData]="doing"
-          >
-          @for (task of doing; track $index) {
-            <div
-              cdkDrag
-              class="bg-white shadow p-2 rounded mt-2 border-b border-x-gray-300 cursor-pointer hover:bg-gray-400"
-            >
-
-              {{ task.title }}
-            </div>
-          }
-        </div>
-      </div>
-
-      <div class="rounded-xl bg-gray-200 w-72 p-2 mr-3">
-        <div class="flex justify-between py-1">
-          <h3 class="text-sm font-bold ml-2">Done</h3>
-        </div>
-
-        <div class="text-sm mt-2 min-h-[2.5rem]"
-          cdkDropList
-          (cdkDropListDropped)="drop($event)"
-          [cdkDropListData]="done"
-          >
-          @for (task of done; track $index) {
-            <div
-              cdkDrag
-              class="bg-white shadow p-2 rounded mt-2 border-b border-x-gray-300 cursor-pointer hover:bg-gray-400"
-            >
-
-              {{ task.title }}
-            </div>
-          }
-        </div>
-      </div>
+      </button>
     </div>
   </div>
 </div>
