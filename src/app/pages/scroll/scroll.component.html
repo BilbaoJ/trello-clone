@@ -1,0 +1,33 @@
+<div class="flex flex-col h-screen">
+  <app-navbar bgColor="blue" textColor="white" logoColor="white"></app-navbar>
+  <main class="w-full grow bg-sky-600 p-6">
+    <section class="flex gap-4">
+      <div class="w-1/2">
+        <h1 class="text-white">Lista A (Normal Scroll)</h1>
+        <div class="h-64 w-full border overflow-y-scroll bg-white rounded mt-2">
+          <!-- @for (product of products(); track $index) {
+            <div class="flex items-center gap-4">
+              <img class="w-10 h-10 rounded-full" [src]="product.images[0]" alt="">
+              <div class="font-medium dark:text-white">
+                  <div class="text-gray-800">{{ product.title }}</div>
+                  <div class="text-sm text-gray-500 dark:text-gray-400">${{ product.price }}</div>
+              </div>
+            </div>
+          } -->
+        </div>
+      </div>
+      <div class="w-1/2">
+        <h1 class="text-white">Lista B (Virtual Scroll)</h1>
+        <cdk-virtual-scroll-viewport itemSize="50" class="h-64 w-full border overflow-y-scroll bg-white rounded mt-2">
+          <div *cdkVirtualFor="let product of products()" class="flex items-center gap-4">
+            <img class="w-10 h-10 rounded-full" [src]="product.images[0]" alt="">
+            <div class="font-medium dark:text-white">
+                <div class="text-gray-800">{{ product.title }}</div>
+                <div class="text-sm text-gray-500 dark:text-gray-400">${{ product.price }}</div>
+            </div>
+          </div>
+        </cdk-virtual-scroll-viewport>
+      </div>
+    </section>
+  </main>
+</div>
