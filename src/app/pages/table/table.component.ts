@@ -1,18 +1,18 @@
 import { Component, signal } from '@angular/core';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
+import {CdkTableModule} from '@angular/cdk/table';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import {ScrollingModule} from '@angular/cdk/scrolling';
 import { Product } from '../../models/product.model';
 
 @Component({
-  selector: 'app-scroll',
+  selector: 'app-table',
   standalone: true,
-  imports: [ NavbarComponent, HttpClientModule, ScrollingModule ],
-  templateUrl: './scroll.component.html'
+  imports: [ NavbarComponent, CdkTableModule, HttpClientModule ],
+  templateUrl: './table.component.html'
 })
-export class ScrollComponent {
-
+export class TableComponent {
   products = signal<Product[]>([]);
+  columns = signal(['id', 'title', 'price']);
 
   constructor(
     private http: HttpClient
@@ -28,5 +28,4 @@ export class ScrollComponent {
       }
     });
   }
-
 }
