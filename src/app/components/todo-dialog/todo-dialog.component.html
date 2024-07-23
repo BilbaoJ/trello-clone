@@ -7,7 +7,7 @@
       <div class="flex space-x-2">
         <fa-icon class="text-gray-800" [icon]="faPager"></fa-icon>
         <div class="flex flex-col">
-          <h3 class="text-lg font-semibold text-gray-800">Task 1</h3>
+          <h3 class="text-lg font-semibold text-gray-800">{{ task.title }}</h3>
           <p class="text-sm text-gray-500">en la lista ToDo</p>
         </div>
       </div>
@@ -68,9 +68,9 @@
       </div>
     </app-btn>
     <app-btn typeBtn="button" color="gray-light">
-      <div class="flex space-x-2 justify-start items-center">
+      <div class="flex space-x-2 justify-start items-center text-left">
         <fa-icon class="text-gray-600 text-xs" [icon]="faPenRuler"></fa-icon>
-        <span class="text-gray-700 text-sm self-start">Campos personalizados</span>
+        <span class="text-gray-700 text-sm">Campos personalizados</span>
       </div>
     </app-btn>
   </aside>

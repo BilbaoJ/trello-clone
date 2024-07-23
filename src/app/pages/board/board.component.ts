@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { DragDropModule, CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
@@ -106,11 +106,18 @@ export class BoardComponent {
     this.columns.update((columns) =>[...columns, newColumn]);
   }
 
-  openDialog(){
-    this.dialog.open(TodoDialogComponent,{
+  openDialog(task: ToDo){
+    const dialogRef = this.dialog.open(TodoDialogComponent,{
       minWidth: '300px',
       maxWidth: '50%',
-      autoFocus: false
+      autoFocus: false,
+      data: {
+        task
+      }
     });
+    dialogRef.closed.subscribe(output => {
+      console.log(output);
+
+    })
   }
 }
