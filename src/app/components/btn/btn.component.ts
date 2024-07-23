@@ -20,6 +20,9 @@ export class BtnComponent {
       'bg-success-600': this.color === 'success',
       'hover:bg-success-700': this.color === 'success',
       'focus:bg-success-950': this.color === 'success',
+      'bg-gray-200': this.color === 'gray-light',
+      'hover:bg-gray-300': this.color === 'gray-light',
+      'focus:bg-gray-400': this.color === 'gray-light',
     };
   }
 

@@ -1,0 +1,77 @@
+<main class="p-6 bg-gray-100 relative rounded-xl shadow flex">
+  <button (click)="close()" type="button" class="absolute top-3 right-3 focus:outline-none p-2">
+    <fa-icon [icon]="faClose"></fa-icon>
+  </button>
+  <section class="w-4/5">
+    <section class="flex flex-col mb-5">
+      <div class="flex space-x-2">
+        <fa-icon class="text-gray-800" [icon]="faPager"></fa-icon>
+        <div class="flex flex-col">
+          <h3 class="text-lg font-semibold text-gray-800">Task 1</h3>
+          <p class="text-sm text-gray-500">en la lista ToDo</p>
+        </div>
+      </div>
+      <div class="flex flex-col space-y-2 my-4 pl-6">
+        <p class="text-xs text-gray-600 font-semibold">Notificaciones</p>
+        <button class="bg-gray-200 px-3 py-1 rounded-md flex space-x-2 text-sm text-gray-700 w-fit">
+          <fa-icon [icon]="faEye"></fa-icon>
+          <span class="font-semibold">Seguir</span>
+        </button>
+      </div>
+    </section>
+    <section class="flex w-full gap-4">
+      <div class="flex space-x-2 mb-5 w-4/6">
+        <fa-icon class="text-gray-800" [icon]="faBars"></fa-icon>
+        <div class="flex flex-col">
+          <h3 class="text-lg font-semibold text-gray-800">Descripción</h3>
+          <p class="text-sm text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis, hic? Adipisci soluta cum odio, beatae ratione magni nobis, optio similique rerum minus excepturi sed vel, id voluptatibus repellendus numquam quod.</p>
+        </div>
+      </div>
+    </section>
+  </section>
+  <aside class="flex flex-auto space-y-2 flex-col w-1/5 mt-8">
+    <p class="text-xs text-gray-500 font-semibold">Añadir a la tarjeta</p>
+    <app-btn typeBtn="button" color="gray-light">
+      <div class="flex space-x-2 justify-start items-center">
+        <fa-icon class="text-gray-600 text-xs" [icon]="faUser"></fa-icon>
+        <span class="text-gray-700 text-sm">Miembros</span>
+      </div>
+    </app-btn>
+    <app-btn typeBtn="button" color="gray-light">
+      <div class="flex space-x-2 justify-start items-center">
+        <fa-icon class="text-gray-600 text-xs" [icon]="faTag"></fa-icon>
+        <span class="text-gray-700 text-sm">Etiquetas</span>
+      </div>
+    </app-btn>
+    <app-btn typeBtn="button" color="gray-light">
+      <div class="flex space-x-2 justify-start items-center">
+        <fa-icon class="text-gray-600 text-xs" [icon]="faCheckSquare"></fa-icon>
+        <span class="text-gray-700 text-sm">Cheklist</span>
+      </div>
+    </app-btn>
+    <app-btn typeBtn="button" color="gray-light">
+      <div class="flex space-x-2 justify-start items-center">
+        <fa-icon class="text-gray-600 text-xs" [icon]="faClock"></fa-icon>
+        <span class="text-gray-700 text-sm">Fechas</span>
+      </div>
+    </app-btn>
+    <app-btn typeBtn="button" color="gray-light">
+      <div class="flex space-x-2 justify-start items-center">
+        <fa-icon class="text-gray-600 text-xs" [icon]="faPaperclip"></fa-icon>
+        <span class="text-gray-700 text-sm">Adjunto</span>
+      </div>
+    </app-btn>
+    <app-btn typeBtn="button" color="gray-light">
+      <div class="flex space-x-2 justify-start items-center">
+        <fa-icon class="text-gray-600 text-xs" [icon]="faHardDrive"></fa-icon>
+        <span class="text-gray-700 text-sm">Portada</span>
+      </div>
+    </app-btn>
+    <app-btn typeBtn="button" color="gray-light">
+      <div class="flex space-x-2 justify-start items-center">
+        <fa-icon class="text-gray-600 text-xs" [icon]="faPenRuler"></fa-icon>
+        <span class="text-gray-700 text-sm self-start">Campos personalizados</span>
+      </div>
+    </app-btn>
+  </aside>
+</main>

@@ -8,11 +8,13 @@ import { faStar, faLock, faChartSimple, faChevronDown,
           faRocket, faBoltLightning, faFilter, faUserPlus,
             faEllipsis, faPlus} from '@fortawesome/free-solid-svg-icons';
 import { Column } from '../../models/column.model';
+import {DialogModule, Dialog} from '@angular/cdk/dialog';
+import { TodoDialogComponent } from '../../components/todo-dialog/todo-dialog.component'
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, DragDropModule, FontAwesomeModule],
+  imports: [CommonModule, NavbarComponent, DragDropModule, FontAwesomeModule, DialogModule],
   templateUrl: './board.component.html',
   styles: [
   `
@@ -75,6 +77,8 @@ export class BoardComponent {
   faEllipsis = faEllipsis;
   faPlus = faPlus;
 
+  constructor(private dialog:Dialog){}
+
   drop(event: CdkDragDrop<ToDo[]>){
     if (event.previousContainer  === event.container) {
       moveItemInArray(event.container.data,
@@ -100,5 +104,13 @@ export class BoardComponent {
       tasks: []
     };
     this.columns.update((columns) =>[...columns, newColumn]);
+  }
+
+  openDialog(){
+    this.dialog.open(TodoDialogComponent,{
+      minWidth: '300px',
+      maxWidth: '50%',
+      autoFocus: false
+    });
   }
 }
