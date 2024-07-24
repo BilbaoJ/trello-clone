@@ -12,11 +12,11 @@ export const routes: Routes = [
     component: LoginComponent
   },
   {
-    path:'boards',
+    path:'app/boards',
     component: BoardsComponent
   },
   {
-    path:'board',
+    path:'app/boards/:id',
     component: BoardComponent
   },
   {
