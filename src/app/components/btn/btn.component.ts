@@ -10,20 +10,35 @@ import { CommonModule } from '@angular/common';
 export class BtnComponent {
 
   @Input() typeBtn: 'button' | 'reset' | 'submit' = 'button';
-  @Input() color: string = 'primary'
+  @Input() color: 'success' | 'primary' | 'grayLight' = 'primary';
+
+  mapColors = {
+    success: {
+      'bg-success-600': true,
+      'hover:bg-success-700': true,
+      'focus:bg-success-950': true,
+      'text-white': true
+    },
+    primary: {
+      'bg-primary-600': true,
+      'hover:bg-primary-700': true,
+      'focus:bg-primary-950': true,
+      'text-white': true
+    },
+    grayLight: {
+      'bg-gray-200': true,
+      'hover:bg-gray-300': true,
+      'focus:bg-gray-400': true,
+      'text-gray-700': true
+    }
+  }
 
   get colors(){
-    return {
-      'bg-primary-600': this.color === 'primary',
-      'hover:bg-primary-700': this.color === 'primary',
-      'focus:bg-primary-950': this.color === 'primary',
-      'bg-success-600': this.color === 'success',
-      'hover:bg-success-700': this.color === 'success',
-      'focus:bg-success-950': this.color === 'success',
-      'bg-gray-200': this.color === 'gray-light',
-      'hover:bg-gray-300': this.color === 'gray-light',
-      'focus:bg-gray-400': this.color === 'gray-light',
-    };
+    const colors = this.mapColors[this.color];
+    if (colors) {
+      return colors
+    }
+    return {}
   }
 
 }
