@@ -6,17 +6,20 @@ import { Product } from '../../models/product.model';
 import { CommonModule } from '@angular/common';
 import { DataSourceProduct } from './data-source';
 import { BtnComponent } from '../../components/btn/btn.component';
+import { ReactiveFormsModule, FormControl } from '@angular/forms';
+import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [ NavbarComponent, CdkTableModule, HttpClientModule, CommonModule, BtnComponent ],
+  imports: [ NavbarComponent, CdkTableModule, HttpClientModule, CommonModule, BtnComponent, ReactiveFormsModule ],
   templateUrl: './table.component.html'
 })
 export class TableComponent {
   dataSource = new DataSourceProduct();
   columns = signal(['id', 'title', 'price', 'actions']);
   total = signal(0);
+  input = new FormControl('', { nonNullable: true });
 
   constructor(
     private http: HttpClient
@@ -32,6 +35,11 @@ export class TableComponent {
 
       }
     });
+    this.input.valueChanges.pipe(
+      debounceTime(3000)
+    ).subscribe(value => {
+      this.dataSource.find(value);
+    })
   }
 
   update(product: Product){
