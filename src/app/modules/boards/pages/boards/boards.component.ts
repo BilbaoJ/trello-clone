@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavbarComponent } from '../../components/navbar/navbar.component';
+import { NavbarComponent } from '@shared/components/navbar/navbar.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faTrello } from '@fortawesome/free-brands-svg-icons';
 import { faWaveSquare, faChevronDown, faChevronUp, faClock, faUser,

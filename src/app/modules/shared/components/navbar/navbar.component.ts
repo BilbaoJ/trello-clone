@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { BtnComponent } from "../btn/btn.component";
+import { BtnComponent } from "@shared/components/btn/btn.component";
 import { OverlayModule } from '@angular/cdk/overlay';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faChevronDown, faChevronRight, faArrowUpRightFromSquare, faBell, faCircleQuestion } from '@fortawesome/free-solid-svg-icons';

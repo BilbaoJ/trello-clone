@@ -1,15 +1,15 @@
-import { Component, output, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NavbarComponent } from '../../components/navbar/navbar.component';
+import { NavbarComponent } from '@shared/components/navbar/navbar.component';
 import { DragDropModule, CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { ToDo } from '../../models/todo.model';
+import { ToDo } from '@shared/models/todo.model';
+import { Column } from '@shared/models/column.model';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faStar, faLock, faChartSimple, faChevronDown,
           faRocket, faBoltLightning, faFilter, faUserPlus,
             faEllipsis, faPlus} from '@fortawesome/free-solid-svg-icons';
-import { Column } from '../../models/column.model';
 import {DialogModule, Dialog} from '@angular/cdk/dialog';
-import { TodoDialogComponent } from '../../components/todo-dialog/todo-dialog.component'
+import { TodoDialogComponent } from '@boards/components/todo-dialog/todo-dialog.component'
 
 @Component({
   selector: 'app-board',
