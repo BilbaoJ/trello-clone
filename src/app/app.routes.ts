@@ -4,6 +4,7 @@ import { BoardsComponent } from '@boards/pages/boards/boards.component';
 import { BoardComponent } from '@boards/pages/board/board.component';
 import { ForgotPasswordComponent } from '@auth/pages/forgot-password/forgot-password.component';
 import { RegisterComponent } from '@auth/pages/register/register.component';
+import { RecoveryComponent } from '@auth/pages/recovery/recovery.component';
 
 export const routes: Routes = [
   {
@@ -25,5 +26,9 @@ export const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: 'recovery',
+    component: RecoveryComponent
   }
 ];

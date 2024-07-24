@@ -1,0 +1,43 @@
+<main class="w-screen h-screen bg-white relative">
+  <app-background></app-background>
+  <section class="relative w-10/12 md:w-5/12 lg:w-3/12 m-auto">
+    <app-header></app-header>
+    <div class="pb-4 px-6">
+      <div class="mb-4">
+        <h1 class="text-center font-semibold pt-4 pb-4 text-gray-800">
+          Establece tu nueva contraseña
+        </h1>
+        <form nonvalidate class="space-y-4">
+          <div class="relative">
+            <input
+              placeholder="Ingrese su contraseña"
+              [type]="showPassword() ? 'text' : 'password'"
+              class="w-full rounded border-2 border-gray-300 text-sm"
+            />
+            <button class="absolute right-2 p-2" type="button" (click)="showPassword.set(!showPassword())">
+              <fa-icon [icon]="showPassword() ? faEye : faEyeSlash"></fa-icon>
+            </button>
+          </div>
+          <div class="relative">
+            <input
+              placeholder="Confirma la contraseña"
+              type="password"
+              class="w-full rounded border-2 border-gray-300 text-sm"
+            />
+          </div>
+          <div>
+            <app-btn [typeBtn]="'submit'" [color]="'primary'">Registrarse</app-btn>
+          </div>
+        </form>
+      </div>
+      <div>
+        <ul class="flex space-x-2 justify-center text-center">
+          <li>
+            <a routerLink="/login" class="text-sm text-blue-600 hover:underline">Regresar al inicio de sesión</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <app-footer></app-footer>
+  </section>
+</main>
