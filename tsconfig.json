@@ -27,7 +27,9 @@
       "@shared/*":["./src/app/modules/shared/*"],
       "@boards/*":["./src/app/modules/boards/*"],
       "@auth/*":["./src/app/modules/auth/*"],
-      "@assets/*":["./src/assets/*"]
+      "@assets/*":["./src/assets/*"],
+      "@environments/*":["./src/environments/*"],
+      "@services/*":["./src/app/services/*"]
     }
   },
   "angularCompilerOptions": {

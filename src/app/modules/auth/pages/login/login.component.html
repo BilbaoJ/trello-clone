@@ -7,16 +7,67 @@
         <h1 class="text-center font-semibold pt-4 pb-4 text-gray-800">
           Inicia sesión para continuar
         </h1>
-        <form nonvalidate class="space-y-4">
-          <div class="relative">
-            <input
-              placeholder="Introduce tu correo electrónico"
-              type="text"
-              class="w-full rounded border-2 border-gray-300"
-            />
+        <form [formGroup]="form" class="space-y-4" (ngSubmit)="doLogin()">
+          <div>
+            <div class="relative">
+              <input
+                #nameInput
+                formControlName="email"
+                placeholder="Introduce tu correo electrónico"
+                type="text"
+                class="w-full rounded border-2 border-gray-300 text-sm"
+              />
+              <button type="button" class="p-2 absolute right-2" (click)="nameInput.focus()">
+                <fa-icon [icon]="faPen"></fa-icon>
+              </button>
+            </div>
+            @if (form.controls.email.touched && form.controls.email.invalid) {
+              <div>
+                @if (form.controls.email.hasError('required')) {
+                  <p class="font-medium text-red-500 text-xs mt-1 ml-1">
+                    Este campo es obligatorio
+                  </p>
+                } @else if (form.controls.email.hasError('email')){
+                  <p class="font-medium text-red-500 text-xs mt-1 ml-1">
+                    Debes ingresar un correo valido
+                  </p>
+                }
+              </div>
+            }
           </div>
           <div>
-            <app-btn [typeBtn]="'submit'" [color]="'primary'">Continuar</app-btn>
+            <div class="relative">
+              <input
+                formControlName="password"
+                placeholder="Introduce tu contraseña"
+                [type]="showPassword() ? 'text' : 'password'"
+                class="w-full rounded border-2 border-gray-300 text-sm"
+              />
+              <button class="absolute right-2 p-2" type="button" (click)="showPassword.set(!showPassword())">
+                <fa-icon [icon]="showPassword() ? faEye : faEyeSlash"></fa-icon>
+              </button>
+            </div>
+            @if (form.controls.password.touched && form.controls.password.invalid) {
+              <div>
+                @if (form.controls.password.hasError('required')) {
+                  <p class="font-medium text-red-500 text-xs mt-1 ml-1">
+                    Este campo es obligatorio
+                  </p>
+                } @else if (form.controls.password.hasError('minlength')){
+                  <p class="font-medium text-red-500 text-xs mt-1 ml-1">
+                    La contraseña debe ser de 6 caracteres minimo
+                  </p>
+                }
+              </div>
+            }
+          </div>
+          @if (status === 'failed') {
+            <p class="font-medium text-red-500 text-xs mt-1 ml-1">
+              Las credenciales son invalidas
+            </p>
+          }
+          <div>
+            <app-btn typeBtn="submit" color="primary">Continuar</app-btn>
           </div>
         </form>
         <div class="space-y-4 pt-4">
