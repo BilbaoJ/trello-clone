@@ -7,40 +7,114 @@
         <h1 class="text-center font-semibold pt-4 pb-4 text-gray-800">
           Regístrate para continuar
         </h1>
-        <form nonvalidate class="space-y-4">
-          <div class="relative">
-            <input
-              placeholder="Ingrese su nombre"
-              type="text"
-              class="w-full rounded border-2 border-gray-300 text-sm"
-            />
-          </div>
-          <div class="relative">
-            <input
-              placeholder="Ingrese correo electrónico"
-              type="text"
-              class="w-full rounded border-2 border-gray-300 text-sm"
-            />
-          </div>
-          <div class="relative">
-            <input
-              placeholder="Ingrese su contraseña"
-              [type]="showPassword() ? 'text' : 'password'"
-              class="w-full rounded border-2 border-gray-300 text-sm"
-            />
-            <button class="absolute right-2 p-2" type="button" (click)="showPassword.set(!showPassword())">
-              <fa-icon [icon]="showPassword() ? faEye : faEyeSlash"></fa-icon>
-            </button>
-          </div>
-          <div class="relative">
-            <input
-              placeholder="Confirma la contraseña"
-              type="password"
-              class="w-full rounded border-2 border-gray-300 text-sm"
-            />
+        <form [formGroup]="form" novalidate class="space-y-4" (ngSubmit)="register()">
+          <div>
+            <div class="relative">
+              <input
+                formControlName="name"
+                placeholder="Ingrese su nombre"
+                type="text"
+                class="w-full rounded border-2 border-gray-300 text-sm"
+              />
+            </div>
+            @if (form.controls.name.touched && form.controls.name.invalid) {
+              <div>
+                @if (form.controls.name.hasError('required')) {
+                  <p class="font-medium text-red-500 text-xs mt-1 ml-1">
+                    Este campo es obligatorio
+                  </p>
+                }
+              </div>
+            }
           </div>
           <div>
-            <app-btn [typeBtn]="'submit'" [color]="'primary'">Registrarse</app-btn>
+            <div class="relative">
+              <input
+                formControlName="email"
+                placeholder="Ingrese correo electrónico"
+                type="text"
+                class="w-full rounded border-2 border-gray-300 text-sm"
+              />
+            </div>
+            @if (form.controls.email.touched && form.controls.email.invalid) {
+              <div>
+                @if (form.controls.email.hasError('required')) {
+                  <p class="font-medium text-red-500 text-xs mt-1 ml-1">
+                    Este campo es obligatorio
+                  </p>
+                } @else if (form.controls.email.hasError('email')){
+                  <p class="font-medium text-red-500 text-xs mt-1 ml-1">
+                    Ingrese un correo valido
+                  </p>
+                }
+              </div>
+            }
+          </div>
+          <div>
+            <div class="relative">
+              <input
+                formControlName="password"
+                placeholder="Ingrese su contraseña"
+                [type]="showPassword() ? 'text' : 'password'"
+                class="w-full rounded border-2 border-gray-300 text-sm"
+              />
+              <button class="absolute right-2 p-2" type="button" (click)="showPassword.set(!showPassword())">
+                <fa-icon [icon]="showPassword() ? faEye : faEyeSlash"></fa-icon>
+              </button>
+            </div>
+            @if (form.controls.password.touched && form.controls.password.invalid) {
+              <div>
+                @if (form.controls.password.hasError('required')) {
+                  <p class="font-medium text-red-500 text-xs mt-1 ml-1">
+                    Este campo es obligatorio
+                  </p>
+                } @else if (form.controls.password.hasError('minlength')){
+                  <p class="font-medium text-red-500 text-xs mt-1 ml-1">
+                    La contraseña debe ser de 8 caracteres minimo
+                  </p>
+                }
+              </div>
+            }
+          </div>
+          <div>
+            <div class="relative">
+              <input
+                formControlName="confirmPassword"
+                placeholder="Confirma la contraseña"
+                type="password"
+                class="w-full rounded border-2 border-gray-300 text-sm"
+              />
+            </div>
+            @if (form.controls.confirmPassword.touched && form.controls.confirmPassword.invalid) {
+              <div>
+                @if (form.controls.confirmPassword.hasError('required')) {
+                  <p class="font-medium text-red-500 text-xs mt-1 ml-1">
+                    Este campo es obligatorio
+                  </p>
+                } @else if (form.controls.confirmPassword.hasError('minlength')){
+                  <p class="font-medium text-red-500 text-xs mt-1 ml-1">
+                    La contraseña debe ser de 8 caracteres minimo
+                  </p>
+                }
+              </div>
+            }
+          </div>
+          @if (form.controls.confirmPassword.touched) {
+            <div>
+              @if (form.hasError('mismatch')) {
+                <p class="font-medium text-red-500 text-xs mt-1 ml-1">
+                  Las contraseñas no coinciden
+                </p>
+              }
+            </div>
+          }
+          @if (status() === 'failed' && message() !== '') {
+            <p class="font-medium text-red-500 text-xs mt-1 ml-1">
+              {{ message() }}
+            </p>
+          }
+          <div>
+            <app-btn typeBtn="submit" color="primary">Registrarse</app-btn>
           </div>
         </form>
       </div>

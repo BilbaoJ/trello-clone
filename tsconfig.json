@@ -29,7 +29,8 @@
       "@auth/*":["./src/app/modules/auth/*"],
       "@assets/*":["./src/assets/*"],
       "@environments/*":["./src/environments/*"],
-      "@services/*":["./src/app/services/*"]
+      "@services/*":["./src/app/services/*"],
+      "@utils/*":["./src/app/utils/*"]
     }
   },
   "angularCompilerOptions": {
