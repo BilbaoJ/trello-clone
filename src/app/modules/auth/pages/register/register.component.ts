@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import { BackgroundComponent } from '@auth/components/background/background.component';
 import { FooterComponent } from '@auth/components/footer/footer.component';
 import { HeaderComponent } from '@auth/components/header/header.component';
@@ -30,6 +30,7 @@ export class RegisterComponent {
 
   private authService = inject(AuthService);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
   formUser = new FormGroup({
     email: new FormControl('', {
       nonNullable: true,
@@ -79,6 +80,16 @@ export class RegisterComponent {
   showPassword = signal(false);
   showRegister = signal(false);
 
+  constructor(){
+    this.route.queryParamMap.subscribe(params => {
+      const email = params.get('email');
+      if (email) {
+        this.showRegister.set(true)
+        this.form.controls.email.setValue(email);
+      }
+    })
+  }
+
   register(){
     if (this.form.valid) {
       this.status.set('loading');
@@ -119,7 +130,7 @@ export class RegisterComponent {
         error: () => {
         }
       });
-;    }else{
+    }else{
       this.formUser.markAllAsTouched();
     }
   }

@@ -41,25 +41,6 @@
             <div>
               <div class="relative">
                 <input
-                  formControlName="name"
-                  placeholder="Ingrese su nombre"
-                  type="text"
-                  class="w-full rounded border-2 border-gray-300 text-sm"
-                />
-              </div>
-              @if (form.controls.name.touched && form.controls.name.invalid) {
-                <div>
-                  @if (form.controls.name.hasError('required')) {
-                    <p class="font-medium text-red-500 text-xs mt-1 ml-1">
-                      Este campo es obligatorio
-                    </p>
-                  }
-                </div>
-              }
-            </div>
-            <div>
-              <div class="relative">
-                <input
                   formControlName="email"
                   placeholder="Ingrese correo electrónico"
                   type="text"
@@ -75,6 +56,25 @@
                   } @else if (form.controls.email.hasError('email')){
                     <p class="font-medium text-red-500 text-xs mt-1 ml-1">
                       Ingrese un correo valido
+                    </p>
+                  }
+                </div>
+              }
+            </div>
+            <div>
+              <div class="relative">
+                <input
+                  formControlName="name"
+                  placeholder="Ingrese su nombre"
+                  type="text"
+                  class="w-full rounded border-2 border-gray-300 text-sm"
+                />
+              </div>
+              @if (form.controls.name.touched && form.controls.name.invalid) {
+                <div>
+                  @if (form.controls.name.hasError('required')) {
+                    <p class="font-medium text-red-500 text-xs mt-1 ml-1">
+                      Este campo es obligatorio
                     </p>
                   }
                 </div>

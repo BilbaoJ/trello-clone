@@ -30,6 +30,15 @@ export class LoginComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
+  formUser = new FormGroup({
+    email: new FormControl('', {
+      nonNullable: true,
+      validators: [
+        Validators.required,
+        Validators.email
+      ]
+    })
+  });
   form = new FormGroup({
     email: new FormControl('', {
       nonNullable: true,
@@ -46,12 +55,14 @@ export class LoginComponent {
       ]
     })
   });
-  status: RequestStatus = 'init';
+  status = signal<RequestStatus>('init');
+  statusUser = signal<RequestStatus>('init');
 
   faEye = faEye;
   faEyeSlash = faEyeSlash;
   faPen = faPen;
   showPassword = signal(false);
+  showLogin = signal(false);
 
   constructor(){
     this.route.queryParamMap.subscribe(params => {
@@ -64,19 +75,43 @@ export class LoginComponent {
 
   doLogin() {
     if (this.form.valid) {
-      this.status = 'loading';
+      this.status.set('loading');
       const {email, password} = this.form.getRawValue();
       this.authService.login(email, password).subscribe({
         next: () => {
-          this.status = 'success';
+          this.status.set('success');
           this.router.navigate(['/app/boards']);
         },
         error: () => {
-          this.status = 'failed';
+          this.status.set('failed');
         }
       })
     } else{
       this.form.markAllAsTouched();
+    }
+  }
+
+  validateUser(){
+    if (this.formUser.valid) {
+      this.statusUser.set('loading');
+      const {email} = this.formUser.getRawValue();
+      this.authService.isAvailable(email).subscribe({
+        next: (rta) => {
+          this.statusUser.set('success');
+          if (!rta.isAvailable) {
+            this.form.controls.email.setValue(email);
+            this.showLogin.set(true);
+          }else{
+            this.router.navigate(['/register'], {
+              queryParams: { email }
+            });
+          }
+        },
+        error: () => {
+        }
+      });
+    }else{
+      this.formUser.markAllAsTouched();
     }
   }
 
