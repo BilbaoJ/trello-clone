@@ -30,6 +30,15 @@ export class RegisterComponent {
 
   private authService = inject(AuthService);
   private router = inject(Router);
+  formUser = new FormGroup({
+    email: new FormControl('', {
+      nonNullable: true,
+      validators: [
+        Validators.required,
+        Validators.email
+      ]
+    })
+  });
   form = new FormGroup({
     name: new FormControl('', {
       nonNullable: true,
@@ -62,11 +71,13 @@ export class RegisterComponent {
     validators: [ CustomValidators.MatchValidator('password', 'confirmPassword') ]
   });
   status = signal<RequestStatus>('init');
+  statusUser = signal<RequestStatus>('init');
   message = signal('');
 
   faEye = faEye;
   faEyeSlash = faEyeSlash;
   showPassword = signal(false);
+  showRegister = signal(false);
 
   register(){
     if (this.form.valid) {
@@ -86,6 +97,30 @@ export class RegisterComponent {
       });
     }else{
       this.form.markAllAsTouched();
+    }
+  }
+
+  validateUser(){
+    if (this.formUser.valid) {
+      this.statusUser.set('loading');
+      const {email} = this.formUser.getRawValue();
+      this.authService.isAvailable(email).subscribe({
+        next: (rta) => {
+          this.statusUser.set('success');
+          if (rta.isAvailable) {
+            this.form.controls.email.setValue(email);
+            this.showRegister.set(true);
+          }else{
+            this.router.navigate(['/login'], {
+              queryParams: { email }
+            });
+          }
+        },
+        error: () => {
+        }
+      });
+;    }else{
+      this.formUser.markAllAsTouched();
     }
   }
 

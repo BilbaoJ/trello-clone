@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import { BackgroundComponent } from '@auth/components/background/background.component';
 import { FooterComponent } from '@auth/components/footer/footer.component';
 import { HeaderComponent } from '@auth/components/header/header.component';
@@ -29,6 +29,7 @@ export class LoginComponent {
 
   private authService = inject(AuthService);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
   form = new FormGroup({
     email: new FormControl('', {
       nonNullable: true,
@@ -52,7 +53,14 @@ export class LoginComponent {
   faPen = faPen;
   showPassword = signal(false);
 
-  constructor(){}
+  constructor(){
+    this.route.queryParamMap.subscribe(params => {
+      const email = params.get('email');
+      if (email) {
+        this.form.controls.email.setValue(email);
+      }
+    })
+  }
 
   doLogin() {
     if (this.form.valid) {
