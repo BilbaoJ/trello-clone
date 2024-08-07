@@ -7,26 +7,58 @@
         <h1 class="text-center font-semibold pt-4 pb-4 text-gray-800">
           Establece tu nueva contraseña
         </h1>
-        <form nonvalidate class="space-y-4">
-          <div class="relative">
-            <input
-              placeholder="Ingrese su contraseña"
-              [type]="showPassword() ? 'text' : 'password'"
-              class="w-full rounded border-2 border-gray-300 text-sm"
-            />
-            <button class="absolute right-2 p-2" type="button" (click)="showPassword.set(!showPassword())">
-              <fa-icon [icon]="showPassword() ? faEye : faEyeSlash"></fa-icon>
-            </button>
-          </div>
-          <div class="relative">
-            <input
-              placeholder="Confirma la contraseña"
-              type="password"
-              class="w-full rounded border-2 border-gray-300 text-sm"
-            />
+        <form nonvalidate [formGroup]="form" class="space-y-4" (ngSubmit)="recovery()">
+          <div>
+            <div class="relative">
+              <input
+                formControlName="newPassword"
+                placeholder="Ingrese su contraseña"
+                [type]="showPassword() ? 'text' : 'password'"
+                class="w-full rounded border-2 border-gray-300 text-sm"
+              />
+              <button class="absolute right-2 p-2" type="button" (click)="showPassword.set(!showPassword())">
+                <fa-icon [icon]="showPassword() ? faEye : faEyeSlash"></fa-icon>
+              </button>
+            </div>
+            @if (form.controls.newPassword.touched && form.controls.newPassword.invalid) {
+              <div>
+                @if (form.controls.newPassword.hasError('required')) {
+                  <p class="font-medium text-red-500 text-xs mt-1 ml-1">
+                    Este campo es obligatorio
+                  </p>
+                } @else if (form.controls.newPassword.hasError('minlength')){
+                  <p class="font-medium text-red-500 text-xs mt-1 ml-1">
+                    La contraseña debe ser de 8 caracteres minimo
+                  </p>
+                }
+              </div>
+            }
           </div>
           <div>
-            <app-btn [typeBtn]="'submit'" [color]="'primary'">Registrarse</app-btn>
+            <div class="relative">
+              <input
+                formControlName="confirmPassword"
+                placeholder="Confirma la contraseña"
+                type="password"
+                class="w-full rounded border-2 border-gray-300 text-sm"
+              />
+            </div>
+            @if (form.controls.confirmPassword.touched && form.controls.confirmPassword.invalid) {
+              <div>
+                @if (form.controls.confirmPassword.hasError('required')) {
+                  <p class="font-medium text-red-500 text-xs mt-1 ml-1">
+                    Este campo es obligatorio
+                  </p>
+                } @else if (form.controls.confirmPassword.hasError('minlength')){
+                  <p class="font-medium text-red-500 text-xs mt-1 ml-1">
+                    La contraseña debe ser de 8 caracteres minimo
+                  </p>
+                }
+              </div>
+            }
+          </div>
+          <div>
+            <app-btn [typeBtn]="'submit'" [color]="'primary'">Establecer contraseña</app-btn>
           </div>
         </form>
       </div>
