@@ -1,10 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { BtnComponent } from "@shared/components/btn/btn.component";
 import { OverlayModule } from '@angular/cdk/overlay';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faChevronDown, faChevronRight, faArrowUpRightFromSquare, faBell, faCircleQuestion } from '@fortawesome/free-solid-svg-icons';
+import { AuthService } from '@services/auth.service';
 
 @Component({
     selector: 'app-navbar',
@@ -18,6 +19,8 @@ export class NavbarComponent {
   @Input() bgColor: string = 'white';
   @Input() logoColor: string = 'neutral';
 
+  private authService = inject(AuthService);
+  private router = inject(Router);
   isOpen : boolean = false;
   faChevronDown = faChevronDown;
   faChevronRight = faChevronRight;
@@ -50,4 +53,10 @@ export class NavbarComponent {
   get logo(){
     return `/assets/logo/images/logo-gradient-${this.logoColor}-trello.png`
   }
+
+  logOut(){
+    this.authService.logOut();
+    this.router.navigate(['/login']);
+  }
+
 }
