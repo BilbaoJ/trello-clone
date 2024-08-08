@@ -26,7 +26,7 @@ import { CustomValidators } from '@utils/validators';
           ],
   templateUrl: './register.component.html'
 })
-export class RegisterComponent {
+export default class RegisterComponent {
 
   private authService = inject(AuthService);
   private router = inject(Router);

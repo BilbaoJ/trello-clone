@@ -30,7 +30,7 @@ import { TodoDialogComponent } from '@boards/components/todo-dialog/todo-dialog.
   `
   ]
 })
-export class BoardComponent {
+export default class BoardComponent {
 
   columns = signal<Column[]>([
     {

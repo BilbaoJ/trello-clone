@@ -22,7 +22,7 @@ import { RequestStatus } from '@shared/models/request-status.model';
           ],
   templateUrl: './forgot-password.component.html'
 })
-export class ForgotPasswordComponent {
+export default class ForgotPasswordComponent {
 
   private authService = inject(AuthService);
   form = new FormGroup({

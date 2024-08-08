@@ -24,7 +24,7 @@ import { RequestStatus } from '@shared/models/request-status.model';
           ],
   templateUrl: './recovery.component.html'
 })
-export class RecoveryComponent {
+export default class RecoveryComponent {
 
   private authService = inject(AuthService);
   private route = inject(ActivatedRoute);

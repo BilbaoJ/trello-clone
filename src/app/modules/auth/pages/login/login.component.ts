@@ -25,7 +25,7 @@ import { RequestStatus } from '@shared/models/request-status.model';
           ],
   templateUrl: './login.component.html'
 })
-export class LoginComponent {
+export default class LoginComponent {
 
   private authService = inject(AuthService);
   private router = inject(Router);

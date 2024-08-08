@@ -13,7 +13,7 @@ import { RouterLink } from '@angular/router';
   imports: [NavbarComponent, FontAwesomeModule, CdkAccordionModule, RouterLink],
   templateUrl: './boards.component.html'
 })
-export class BoardsComponent {
+export default class BoardsComponent {
 
   faTrello = faTrello;
   faWaveSquare = faWaveSquare;
