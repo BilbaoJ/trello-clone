@@ -30,7 +30,8 @@
       "@assets/*":["./src/assets/*"],
       "@environments/*":["./src/environments/*"],
       "@services/*":["./src/app/services/*"],
-      "@utils/*":["./src/app/utils/*"]
+      "@utils/*":["./src/app/utils/*"],
+      "@interceptors/*":["./src/app/interceptors/*"]
     }
   },
   "angularCompilerOptions": {
