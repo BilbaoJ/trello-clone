@@ -3,11 +3,12 @@ import { UsersService } from '@services/users.service';
 import { DataSourceUser } from './data-source';
 import { CommonModule } from '@angular/common';
 import {CdkTableModule} from '@angular/cdk/table';
+import { NavbarComponent } from '@shared/components/navbar/navbar.component';
 
 @Component({
   selector: 'app-users-table',
   standalone: true,
-  imports: [CommonModule, CdkTableModule],
+  imports: [CommonModule, CdkTableModule, NavbarComponent],
   templateUrl: './users-table.component.html',
 })
 export class UsersTableComponent {
