@@ -77,7 +77,7 @@
       >
         <img
           class="w-6 h-6 rounded-full"
-          src="https://picsum.photos/400/400"
+          [src]="user?.avatar"
           alt="user photo"
         />
       </button>
@@ -96,11 +96,11 @@
       <div class="flex flex-col space-y-4">
         <header class="flex space-x-4">
           <figure class="w-12 h-12">
-            <img class="rounded-full" src="https://picsum.photos/400/400" alt="user photo">
+            <img class="rounded-full" [src]="user?.avatar" alt="user photo">
           </figure>
           <div class="flex flex-col">
-            <p class="text-base">Jessica Bilbao</p>
-            <p class="text-sm text-gray-600">jessi&commat;email.com</p>
+            <p class="text-base">{{ user?.name }}</p>
+            <p class="text-sm text-gray-600">{{ user?.email }}</p>
           </div>
         </header>
         <div>
