@@ -1,174 +1,178 @@
-<nav class="px-6" [ngClass] = "bgColors">
-  <div class="flex flex-wrap justify-between items-center">
-    <div class="flex items-center space-x-4">
-      <figure class="w-20">
-        <a routerLink="/">
-          <img
-            [src]="logo"
-            alt="logo trello"
-          />
-        </a>
-      </figure>
-      <div class="flex items-center">
-        <ul
-          class="flex items-center space-x-2 text-sm font-semibold"
-          [ngClass] = "colorText"
-        >
-          <li class="p-2">
-            <a
-              href="#"
-              class="py-1 px-2 rounded flex items-center space-x-1"
-              [ngClass] = "hover"
-            >
-              <span>Espacios de trabajo</span>
-              <fa-icon [ngClass] = "colorText" [icon]="faChevronDown"></fa-icon>
+@if (user | async; as user) {
+  <ng-container>
+    <nav class="px-6" [ngClass] = "bgColors">
+      <div class="flex flex-wrap justify-between items-center">
+        <div class="flex items-center space-x-4">
+          <figure class="w-20">
+            <a routerLink="/">
+              <img
+                [src]="logo"
+                alt="logo trello"
+              />
             </a>
-          </li>
-          <li class="p-2">
-            <a
-              href="#"
-              class="py-1 px-2 rounded flex items-center space-x-1"
-              [ngClass] = "hover"
-            >
-              <span>Reciente</span>
-              <fa-icon [ngClass] = "colorText" [icon]="faChevronDown"></fa-icon>
-            </a>
-          </li>
-          <li class="p-2">
-            <a
-              href="#"
-              class="py-1 px-2 rounded flex items-center space-x-1"
-              [ngClass] = "hover"
-            >
-              <span>Marcado</span>
-              <fa-icon [ngClass] = "colorText" [icon]="faChevronDown"></fa-icon>
-            </a>
-          </li>
-          <li class="p-2">
-            <a
-              href="#"
-              class="py-1 px-2 rounded flex items-center space-x-1"
-              [ngClass] = "hover"
-            >
-              <span>Plantillas</span>
-              <fa-icon [ngClass] = "colorText" [icon]="faChevronDown"></fa-icon>
-            </a>
-          </li>
-          <li class="p-1">
-            <app-btn [typeBtn]="'button'" [color]="'primary'">Crear</app-btn>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="flex items-center space-x-4">
-      <button type="button">
-        <fa-icon [ngClass]="colorText" [icon]="faBell"></fa-icon>
-      </button>
-      <button>
-        <fa-icon [ngClass]="colorText" [icon]="faCircleQuestion"></fa-icon>
-      </button>
-      <button
-        type="button"
-        class="flex rounded-full"
-        aria-expanded="false"
-        (click)="isOpen = !isOpen"
-        cdkOverlayOrigin
-        #menuOverlay="cdkOverlayOrigin"
-      >
-        <img
-          class="w-6 h-6 rounded-full"
-          [src]="user?.avatar"
-          alt="user photo"
-        />
-      </button>
-    </div>
-  </div>
-</nav>
-<ng-template
-  cdkConnectedOverlay
-  [cdkConnectedOverlayOrigin]="menuOverlay"
-  [cdkConnectedOverlayOpen]="isOpen"
-  (overlayOutsideClick)="isOpen = !isOpen"
->
-  <section class="bg-white flex flex-col items-start divide-y divide-gray-300 w-80 rounded shadow-lg mt-4 py-3 px-4 border border-gray-200 text-blue-950">
-    <div class="flex flex-col space-y-4 w-full py-3 px-4">
-      <span class="font-bold text-gray-500 text-xs my-2">CUENTA</span>
-      <div class="flex flex-col space-y-4">
-        <header class="flex space-x-4">
-          <figure class="w-12 h-12">
-            <img class="rounded-full" [src]="user?.avatar" alt="user photo">
           </figure>
-          <div class="flex flex-col">
-            <p class="text-base">{{ user?.name }}</p>
-            <p class="text-sm text-gray-600">{{ user?.email }}</p>
+          <div class="flex items-center">
+            <ul
+              class="flex items-center space-x-2 text-sm font-semibold"
+              [ngClass] = "colorText"
+            >
+              <li class="p-2">
+                <a
+                  href="#"
+                  class="py-1 px-2 rounded flex items-center space-x-1"
+                  [ngClass] = "hover"
+                >
+                  <span>Espacios de trabajo</span>
+                  <fa-icon [ngClass] = "colorText" [icon]="faChevronDown"></fa-icon>
+                </a>
+              </li>
+              <li class="p-2">
+                <a
+                  href="#"
+                  class="py-1 px-2 rounded flex items-center space-x-1"
+                  [ngClass] = "hover"
+                >
+                  <span>Reciente</span>
+                  <fa-icon [ngClass] = "colorText" [icon]="faChevronDown"></fa-icon>
+                </a>
+              </li>
+              <li class="p-2">
+                <a
+                  href="#"
+                  class="py-1 px-2 rounded flex items-center space-x-1"
+                  [ngClass] = "hover"
+                >
+                  <span>Marcado</span>
+                  <fa-icon [ngClass] = "colorText" [icon]="faChevronDown"></fa-icon>
+                </a>
+              </li>
+              <li class="p-2">
+                <a
+                  href="#"
+                  class="py-1 px-2 rounded flex items-center space-x-1"
+                  [ngClass] = "hover"
+                >
+                  <span>Plantillas</span>
+                  <fa-icon [ngClass] = "colorText" [icon]="faChevronDown"></fa-icon>
+                </a>
+              </li>
+              <li class="p-1">
+                <app-btn [typeBtn]="'button'" [color]="'primary'">Crear</app-btn>
+              </li>
+            </ul>
           </div>
-        </header>
-        <div>
+        </div>
+        <div class="flex items-center space-x-4">
+          <button type="button">
+            <fa-icon [ngClass]="colorText" [icon]="faBell"></fa-icon>
+          </button>
+          <button>
+            <fa-icon [ngClass]="colorText" [icon]="faCircleQuestion"></fa-icon>
+          </button>
+          <button
+            type="button"
+            class="flex rounded-full"
+            aria-expanded="false"
+            (click)="isOpen = !isOpen"
+            cdkOverlayOrigin
+            #menuOverlay="cdkOverlayOrigin"
+          >
+            <img
+              class="w-6 h-6 rounded-full"
+              [src]="user?.avatar"
+              alt="user photo"
+            />
+          </button>
+        </div>
+      </div>
+    </nav>
+    <ng-template
+      cdkConnectedOverlay
+      [cdkConnectedOverlayOrigin]="menuOverlay"
+      [cdkConnectedOverlayOpen]="isOpen"
+      (overlayOutsideClick)="isOpen = !isOpen"
+    >
+      <section class="bg-white flex flex-col items-start divide-y divide-gray-300 w-80 rounded shadow-lg mt-4 py-3 px-4 border border-gray-200 text-blue-950">
+        <div class="flex flex-col space-y-4 w-full py-3 px-4">
+          <span class="font-bold text-gray-500 text-xs my-2">CUENTA</span>
+          <div class="flex flex-col space-y-4">
+            <header class="flex space-x-4">
+              <figure class="w-12 h-12">
+                <img class="rounded-full" [src]="user?.avatar" alt="user photo">
+              </figure>
+              <div class="flex flex-col">
+                <p class="text-base">{{ user?.name }}</p>
+                <p class="text-sm text-gray-600">{{ user?.email }}</p>
+              </div>
+            </header>
+            <div>
+              <ul class="flex flex-col space-y-4 text-sm">
+                <li>
+                  <a href="#" class="block">Cambiar cuentas</a>
+                </li>
+                <li>
+                  <a href="#" class="flex items-center justify-between">
+                    <span>Gestionar cuenta</span>
+                    <fa-icon class="text-gray-600" [icon]="faArrowUpRightFromSquare"></fa-icon>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="py-3 px-4 w-full">
+          <span class="font-bold text-gray-500 text-xs my-2">TRELLO</span>
+          <div class="pt-3">
+            <ul class="flex flex-col space-y-4 text-sm">
+              <li>
+                <a href="#" class="block">Perfil y visibilidad</a>
+              </li>
+              <li>
+                <a href="#" class="block">Actividad</a>
+              </li>
+              <li>
+                <a href="#" class="block">Tarjetas</a>
+              </li>
+              <li>
+                <a href="#" class="block">Ajustes</a>
+              </li>
+              <li>
+                <a href="#" class="flex items-center justify-between">
+                  <span>Tema</span>
+                  <fa-icon class="text-gray-600" [icon]="faChevronRight"></fa-icon>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="py-3 px-4 w-full">
           <ul class="flex flex-col space-y-4 text-sm">
             <li>
-              <a href="#" class="block">Cambiar cuentas</a>
-            </li>
-            <li>
-              <a href="#" class="flex items-center justify-between">
-                <span>Gestionar cuenta</span>
-                <fa-icon class="text-gray-600" [icon]="faArrowUpRightFromSquare"></fa-icon>
+              <a href="#" class="flex items-center space-x-2">
+                <img src="/assets/icons/svg/team-icon.svg" alt="workspace" class="w-5 h-5">
+                <span>Crear Espacio de trabajo</span>
               </a>
             </li>
           </ul>
         </div>
-      </div>
-    </div>
-    <div class="py-3 px-4 w-full">
-      <span class="font-bold text-gray-500 text-xs my-2">TRELLO</span>
-      <div class="pt-3">
-        <ul class="flex flex-col space-y-4 text-sm">
-          <li>
-            <a href="#" class="block">Perfil y visibilidad</a>
-          </li>
-          <li>
-            <a href="#" class="block">Actividad</a>
-          </li>
-          <li>
-            <a href="#" class="block">Tarjetas</a>
-          </li>
-          <li>
-            <a href="#" class="block">Ajustes</a>
-          </li>
-          <li>
-            <a href="#" class="flex items-center justify-between">
-              <span>Tema</span>
-              <fa-icon class="text-gray-600" [icon]="faChevronRight"></fa-icon>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="py-3 px-4 w-full">
-      <ul class="flex flex-col space-y-4 text-sm">
-        <li>
-          <a href="#" class="flex items-center space-x-2">
-            <img src="/assets/icons/svg/team-icon.svg" alt="workspace" class="w-5 h-5">
-            <span>Crear Espacio de trabajo</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-    <div class="py-3 px-4 w-full">
-      <ul class="flex flex-col space-y-4 text-sm">
-        <li>
-          <a href="#" class="block">Ayuda</a>
-        </li>
-        <li>
-          <a href="#" class="block">Accesos directos</a>
-        </li>
-      </ul>
-    </div>
-    <div class="py-3 px-4 w-full">
-      <ul class="text-sm">
-        <li>
-          <button (click)="logOut()" class="block">Cerrar sesión</button>
-        </li>
-      </ul>
-    </div>
-  </section>
-</ng-template>
+        <div class="py-3 px-4 w-full">
+          <ul class="flex flex-col space-y-4 text-sm">
+            <li>
+              <a href="#" class="block">Ayuda</a>
+            </li>
+            <li>
+              <a href="#" class="block">Accesos directos</a>
+            </li>
+          </ul>
+        </div>
+        <div class="py-3 px-4 w-full">
+          <ul class="text-sm">
+            <li>
+              <button (click)="logOut()" class="block">Cerrar sesión</button>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </ng-template>
+  </ng-container>
+}

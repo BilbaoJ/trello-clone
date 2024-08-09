@@ -6,7 +6,6 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faChevronDown, faChevronRight, faArrowUpRightFromSquare, faBell, faCircleQuestion } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '@services/auth.service';
-import { User } from '@shared/models/user.model';
 
 @Component({
     selector: 'app-navbar',
@@ -28,14 +27,7 @@ export class NavbarComponent {
   faArrowUpRightFromSquare = faArrowUpRightFromSquare;
   faBell = faBell;
   faCircleQuestion = faCircleQuestion;
-  user: User| null = null;
-
-  ngOnInit(){
-    this.authService.getProfile()
-    .subscribe(user => {
-      this.user = user
-    });
-  }
+  user = this.authService.user$;
 
   get colorText(){
     return {
