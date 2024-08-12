@@ -6,7 +6,7 @@ import { switchMap } from 'rxjs';
 
 const CHECK_TOKEN = new HttpContextToken<boolean>(() => false);
 
-export function chekToken() {
+export function checkToken() {
   return new HttpContext().set(CHECK_TOKEN, true);
 }
 
