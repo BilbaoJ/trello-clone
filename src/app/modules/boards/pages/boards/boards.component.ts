@@ -8,11 +8,16 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { RouterLink } from '@angular/router';
 import { MeService } from '@services/me.service';
 import { Board } from '@shared/models/board.model';
+import { CardColorComponent } from '@shared/components/card-color/card-color.component';
 
 @Component({
   selector: 'app-boards',
   standalone: true,
-  imports: [NavbarComponent, FontAwesomeModule, CdkAccordionModule, RouterLink],
+  imports: [NavbarComponent,
+            FontAwesomeModule,
+            CdkAccordionModule,
+            RouterLink,
+            CardColorComponent],
   templateUrl: './boards.component.html'
 })
 export default class BoardsComponent {
