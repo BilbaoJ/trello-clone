@@ -135,9 +135,11 @@
       </header>
       <div class="flex flex-col items-start">
         <div class="grid grid-flow-col gap-4 pt-4">
-          <div class="rounded bg-purple-500 h-24 w-48 p-2">
-            <span class="text-white font-bold">Proyecto 1</span>
-          </div>
+          @for (board of boards; track $index) {
+            <a [routerLink]="['/app/boards/', board.id]" class="rounded bg-purple-500 h-24 w-48 p-2">
+              <span class="text-white font-bold">{{ board.title }}</span>
+            </a>
+          }
           <div class="flex items-center justify-center rounded h-24 w-48 p-2 hover:bg-gray-300">
             <span class="text-gray-600 text-sm">Crear tablero nuevo</span>
           </div>
