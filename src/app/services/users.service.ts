@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { TokenService } from './token.service';
 import { environment } from '@environments/environment';
 import { User } from '@shared/models/user.model';
 import { checkToken } from '@interceptors/token.interceptor';
@@ -11,7 +10,6 @@ import { checkToken } from '@interceptors/token.interceptor';
 export class UsersService {
 
   private http = inject(HttpClient);
-  private tokenService = inject(TokenService);
   apiUrl = environment.API_URL;
 
   getUsers(){
