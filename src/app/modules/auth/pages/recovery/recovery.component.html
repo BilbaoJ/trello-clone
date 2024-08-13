@@ -58,7 +58,7 @@
             }
           </div>
           <div>
-            <app-btn [typeBtn]="'submit'" [color]="'primary'">Establecer contraseña</app-btn>
+            <app-btn [typeBtn]="'submit'" [color]="'primary'" [loading]="status() === 'loading'">Establecer contraseña</app-btn>
           </div>
         </form>
       </div>

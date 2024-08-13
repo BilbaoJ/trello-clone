@@ -33,7 +33,7 @@
               }
             </div>
             <div>
-              <app-btn typeBtn="submit" color="primary">Continuar</app-btn>
+              <app-btn typeBtn="submit" color="primary" [loading]="statusUser() === 'loading'">Continuar</app-btn>
             </div>
           </form>
         } @else {
@@ -144,7 +144,7 @@
               </p>
             }
             <div>
-              <app-btn typeBtn="submit" color="primary">Registrarse</app-btn>
+              <app-btn typeBtn="submit" color="primary" [loading]="status() === 'loading'">Registrarse</app-btn>
             </div>
           </form>
         }
