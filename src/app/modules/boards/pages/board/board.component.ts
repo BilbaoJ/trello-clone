@@ -1,15 +1,19 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '@shared/components/navbar/navbar.component';
 import { DragDropModule, CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ToDo } from '@shared/models/todo.model';
-import { Column } from '@shared/models/column.model';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faStar, faLock, faChartSimple, faChevronDown,
           faRocket, faBoltLightning, faFilter, faUserPlus,
             faEllipsis, faPlus} from '@fortawesome/free-solid-svg-icons';
 import {DialogModule, Dialog} from '@angular/cdk/dialog';
 import { TodoDialogComponent } from '@boards/components/todo-dialog/todo-dialog.component'
+import { ActivatedRoute } from '@angular/router';
+import { BoardsService } from '@services/boards.service';
+import { Board } from '@shared/models/board.model';
+import { Card } from '@shared/models/card.model';
+import { List } from '@shared/models/list.model';
 
 @Component({
   selector: 'app-board',
@@ -32,39 +36,7 @@ import { TodoDialogComponent } from '@boards/components/todo-dialog/todo-dialog.
 })
 export default class BoardComponent {
 
-  columns = signal<Column[]>([
-    {
-      title: 'ToDo',
-      tasks: [
-        {
-          id: '1',
-          title: 'Task 1'
-        },
-        {
-          id: '2',
-          title: 'Task 2'
-        },
-      ]
-    },
-    {
-      title: 'Doing',
-      tasks: [
-        {
-          id: '3',
-          title: 'Task 3'
-        }
-      ]
-    },
-    {
-      title: 'Done',
-      tasks: [
-        {
-          id: '4',
-          title: 'Task 4'
-        }
-      ]
-    }
-  ]);
+  board: Board | null = null;
 
   faStar = faStar;
   faLock = faLock;
@@ -77,9 +49,21 @@ export default class BoardComponent {
   faEllipsis = faEllipsis;
   faPlus = faPlus;
 
+  private route: ActivatedRoute = inject(ActivatedRoute);
+  private boarsdService: BoardsService = inject(BoardsService);
+
   constructor(private dialog:Dialog){}
 
-  drop(event: CdkDragDrop<ToDo[]>){
+  ngOnInit(){
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('id');
+      if (id) {
+        this.getBoard(id);
+      }
+    })
+  }
+
+  drop(event: CdkDragDrop<Card[]>){
     if (event.previousContainer  === event.container) {
       moveItemInArray(event.container.data,
                       event.previousIndex,
@@ -94,30 +78,39 @@ export default class BoardComponent {
     }
   }
 
-  dropColumn(event: CdkDragDrop<Column[]>){
-    moveItemInArray(this.columns(), event.previousIndex, event.currentIndex);
+  dropColumn(event: CdkDragDrop<List[]>){
+    if (this.board) {
+      moveItemInArray(this.board.lists, event.previousIndex, event.currentIndex);
+    }
   }
 
   addColumn(){
-    const newColumn = {
-      title: 'Nueva lista',
-      tasks: []
-    };
-    this.columns.update((columns) =>[...columns, newColumn]);
+    // const newColumn = {
+    //   title: 'Nueva lista',
+    //   tasks: []
+    // };
+    // this.columns.update((columns) =>[...columns, newColumn]);
   }
 
-  openDialog(task: ToDo){
+  openDialog(card: Card){
     const dialogRef = this.dialog.open(TodoDialogComponent,{
       minWidth: '300px',
       maxWidth: '50%',
       autoFocus: false,
       data: {
-        task
+        card
       }
     });
     dialogRef.closed.subscribe(output => {
       console.log(output);
 
     })
+  }
+
+  private getBoard(id: string){
+    this.boarsdService.getBoard(id)
+    .subscribe(board => {
+      this.board = board;
+    });
   }
 }

@@ -5,9 +5,10 @@ import { faClose, faCheckToSlot, faBars, faUser, faTag, faCheckSquare,
           faClock, faEye, faPaperclip, faPager, faHardDrive, faPenRuler} from '@fortawesome/free-solid-svg-icons';
 import { BtnComponent } from '@shared/components/btn/btn.component';
 import { ToDo } from '@shared/models/todo.model';
+import { Card } from '@shared/models/card.model';
 
 interface InputData {
-  task: ToDo
+  card: Card
 }
 
 interface OutputData {
@@ -22,7 +23,7 @@ interface OutputData {
 })
 export class TodoDialogComponent {
 
-  task: ToDo;
+  card: Card;
 
   faClose = faClose;
   faCheckToSlot = faCheckToSlot;
@@ -41,7 +42,7 @@ export class TodoDialogComponent {
     private dialogRef: DialogRef<OutputData>,
     @Inject(DIALOG_DATA) data: InputData
   ){
-    this.task = data.task;
+    this.card = data.card;
   }
 
   close(){
