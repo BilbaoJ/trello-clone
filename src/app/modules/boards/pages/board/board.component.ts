@@ -14,6 +14,7 @@ import { BoardsService } from '@services/boards.service';
 import { Board } from '@shared/models/board.model';
 import { Card } from '@shared/models/card.model';
 import { List } from '@shared/models/list.model';
+import { CardsService } from '@services/cards.service';
 
 @Component({
   selector: 'app-board',
@@ -51,6 +52,7 @@ export default class BoardComponent {
 
   private route: ActivatedRoute = inject(ActivatedRoute);
   private boarsdService: BoardsService = inject(BoardsService);
+  private cardsService: CardsService = inject(CardsService);
 
   constructor(private dialog:Dialog){}
 
@@ -76,6 +78,10 @@ export default class BoardComponent {
                         event.currentIndex
                       );
     }
+    const position = this.boarsdService.getPosition(event.container.data, event.currentIndex);
+    const card = event.container.data[event.currentIndex];
+    const listId = event.container.id;
+    this.updateCard(card, position, listId);
   }
 
   dropColumn(event: CdkDragDrop<List[]>){
@@ -112,5 +118,12 @@ export default class BoardComponent {
     .subscribe(board => {
       this.board = board;
     });
+  }
+
+  private updateCard(card: Card, position: number, listId: string | number){
+    this.cardsService.update(card.id, { position, listId })
+    .subscribe((cardUpdated) => {
+      console.log(cardUpdated);
+    })
   }
 }

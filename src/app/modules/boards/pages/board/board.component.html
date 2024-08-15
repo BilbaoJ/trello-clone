@@ -60,6 +60,7 @@
             cdkDropList
             (cdkDropListDropped)="drop($event)"
             [cdkDropListData]="list.cards"
+            [id]="list.id"
             >
             @for (card of list.cards; track $index) {
               <div
