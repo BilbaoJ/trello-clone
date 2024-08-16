@@ -4,6 +4,7 @@ import { environment } from '@environments/environment';
 import { checkToken } from '@interceptors/token.interceptor';
 import { Board } from '@shared/models/board.model';
 import { Card } from '@shared/models/card.model';
+import { Colors } from '@shared/models/colors.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,15 @@ export class BoardsService {
   getBoard(id: Board['id']){
     return this.http.get<Board>(`${this.apiUrl}/api/v1/boards/${id}`, {
       context : checkToken()
+    });
+  }
+
+  createBoard(title: string, backgroundColor: Colors){
+    return this.http.post<Board>(`${this.apiUrl}/api/v1/boards`, {
+      title,
+      backgroundColor
+    }, {
+      context: checkToken()
     });
   }
 

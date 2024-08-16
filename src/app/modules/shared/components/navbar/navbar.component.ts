@@ -4,14 +4,21 @@ import { Router, RouterLink } from '@angular/router';
 import { BtnComponent } from "@shared/components/btn/btn.component";
 import { OverlayModule } from '@angular/cdk/overlay';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faChevronDown, faChevronRight, faArrowUpRightFromSquare, faBell, faCircleQuestion } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown, faChevronRight, faArrowUpRightFromSquare, faBell, faCircleQuestion, faClose } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '@services/auth.service';
+import { BoardFormComponent } from '../board-form/board-form.component';
 
 @Component({
     selector: 'app-navbar',
     standalone: true,
     templateUrl: './navbar.component.html',
-    imports: [CommonModule, RouterLink, BtnComponent, OverlayModule, FontAwesomeModule]
+    imports: [CommonModule,
+              RouterLink,
+              BtnComponent,
+              OverlayModule,
+              FontAwesomeModule,
+              BoardFormComponent
+            ]
 })
 export class NavbarComponent {
 
@@ -21,12 +28,16 @@ export class NavbarComponent {
 
   private authService = inject(AuthService);
   private router = inject(Router);
-  isOpen : boolean = false;
+
   faChevronDown = faChevronDown;
   faChevronRight = faChevronRight;
   faArrowUpRightFromSquare = faArrowUpRightFromSquare;
   faBell = faBell;
   faCircleQuestion = faCircleQuestion;
+  faClose = faClose;
+
+  isOpenOverlayAvatarMenu : boolean = false;
+  isOpenOverlayCreateBoard : boolean = false;
   user = this.authService.user$;
 
   get colorText(){
@@ -58,6 +69,10 @@ export class NavbarComponent {
   logOut(){
     this.authService.logOut();
     this.router.navigate(['/login']);
+  }
+
+  close(event: boolean){
+    this.isOpenOverlayCreateBoard = event;
   }
 
 }

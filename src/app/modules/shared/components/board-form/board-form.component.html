@@ -1,0 +1,133 @@
+<form [formGroup]="form" novalidate class="space-y-4" (ngSubmit)="doSave()">
+  <div>
+    <p class="font-bold text-xs text-gray-700 mb-2">Fondo</p>
+    <ul class="flex flex-wrap space-x-2">
+      <li class="flex items-center  ">
+        <input
+          id="red-radio"
+          type="radio"
+          value="red"
+          name="backgroundColor"
+          formControlName="backgroundColor"
+          class="hidden peer"
+        />
+        <label
+          for="red-radio"
+          class="bg-red-600 w-10 h-8 rounded inline-flex items-center justify-center text-xs text-transparent peer-checked:text-white"
+          >
+            <fa-icon [icon]="faCheck"></fa-icon>
+          </label
+        >
+      </li>
+      <li class="flex items-center  ">
+        <input
+          id="green-radio"
+          type="radio"
+          value="green"
+          name="backgroundColor"
+          formControlName="backgroundColor"
+          class="hidden peer"
+        />
+        <label
+          for="green-radio"
+          class="bg-green-600 w-10 h-8 rounded inline-flex items-center justify-center text-xs text-transparent peer-checked:text-white"
+          >
+          <fa-icon [icon]="faCheck"></fa-icon>
+          </label
+        >
+      </li>
+      <li class="flex items-center  ">
+        <input
+          id="yellow-radio"
+          type="radio"
+          value="yellow"
+          name="backgroundColor"
+          formControlName="backgroundColor"
+          class="hidden peer"
+        />
+        <label
+          for="yellow-radio"
+          class="bg-yellow-600 w-10 h-8 rounded inline-flex items-center justify-center text-xs text-transparent peer-checked:text-white"
+          >
+          <fa-icon [icon]="faCheck"></fa-icon>
+          </label
+        >
+      </li>
+      <li class="flex items-center  ">
+        <input
+          id="violet-radio"
+          type="radio"
+          value="violet"
+          name="backgroundColor"
+          formControlName="backgroundColor"
+          class="hidden peer"
+        />
+        <label
+          for="violet-radio"
+          class="bg-violet-600 w-10 h-8 rounded inline-flex items-center justify-center text-xs text-transparent peer-checked:text-white"
+          >
+          <fa-icon [icon]="faCheck"></fa-icon>
+          </label
+        >
+      </li>
+      <li class="flex items-center  ">
+        <input
+          id="sky-radio"
+          type="radio"
+          value="sky"
+          name="backgroundColor"
+          formControlName="backgroundColor"
+          class="hidden peer"
+        />
+        <label
+          for="sky-radio"
+          class="bg-sky-600 w-10 h-8 rounded inline-flex items-center justify-center text-xs text-transparent peer-checked:text-white"
+          >
+          <fa-icon [icon]="faCheck"></fa-icon>
+          </label
+        >
+      </li>
+      <li class="flex items-center  ">
+        <input
+          id="gray-radio"
+          type="radio"
+          value="gray"
+          name="backgroundColor"
+          formControlName="backgroundColor"
+          class="hidden peer"
+        />
+        <label
+          for="gray-radio"
+          class="bg-gray-600 w-10 h-8 rounded inline-flex items-center justify-center text-xs text-transparent peer-checked:text-white"
+          >
+          <fa-icon [icon]="faCheck"></fa-icon>
+          </label
+        >
+      </li>
+    </ul>
+  </div>
+  <div>
+    <p class="font-bold text-xs text-gray-700 mb-2">Titulo del tablero</p>
+    <div class="relative">
+      <input
+        #nameInput
+        formControlName="title"
+        type="text"
+        class="w-full rounded border-2 border-gray-300 text-sm"
+      />
+    </div>
+    @if (form.controls.title.touched && form.controls.title.invalid) {
+    <div>
+      @if (form.controls.title.hasError('required')) {
+      <p class="font-medium text-red-500 text-xs mt-1 ml-1">
+        👋 Es necesario indicar el título del tablero
+      </p>
+      }
+    </div>
+    }
+  </div>
+
+  <div>
+    <app-btn typeBtn="submit" color="primary">Crear</app-btn>
+  </div>
+</form>

@@ -142,7 +142,11 @@
               </card-color>
             </a>
           }
-          <div class="flex items-center justify-center rounded h-24 w-48 p-2 hover:bg-gray-300">
+          <div
+            cdkOverlayOrigin
+            #createBoardOverlay = "cdkOverlayOrigin"
+            (click)="isOpenOverlayCreateBoard = !isOpenOverlayCreateBoard"
+            class="flex items-center justify-center rounded h-24 w-48 p-2 hover:bg-gray-300">
             <span class="text-gray-600 text-sm">Crear tablero nuevo</span>
           </div>
         </div>
@@ -171,3 +175,36 @@
     </div>
   </section>
 </main>
+<ng-template
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="createBoardOverlay"
+  [cdkConnectedOverlayOpen]="isOpenOverlayCreateBoard"
+  (overlayOutsideClick)="isOpenOverlayCreateBoard = !isOpenOverlayCreateBoard"
+  [cdkConnectedOverlayPositions]="[
+    {
+      originX: 'end',
+      originY: 'center',
+      overlayX: 'start',
+      overlayY: 'center'
+    },
+    {
+      originX: 'start',
+      originY: 'center',
+      overlayX: 'end',
+      overlayY: 'center'
+    }
+  ]">
+  <section class="bg-white flex flex-col items-start w-80 rounded
+    shadow-lg mt-4 py-3 px-4 border border-gray-200 text-blue-950">
+    <header class="w-full text-center relative">
+      <span class="font-semibold text-gray-600 text-sm my-2">Crear tablero</span>
+      <button (click)="isOpenOverlayCreateBoard = !isOpenOverlayCreateBoard"
+        class="block text-sm text-gray-900 absolute right-3 top-1">
+        <fa-icon [icon]="faClose"></fa-icon>
+      </button>
+    </header>
+    <div class="w-full">
+      <app-board-form (closeOverlay)="close($event)"></app-board-form>
+    </div>
+  </section>
+</ng-template>

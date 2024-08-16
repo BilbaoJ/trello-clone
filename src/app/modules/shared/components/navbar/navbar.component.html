@@ -57,7 +57,12 @@
                 </a>
               </li>
               <li class="p-1">
-                <app-btn [typeBtn]="'button'" [color]="'primary'">Crear</app-btn>
+                <app-btn [typeBtn]="'button'" [color]="'primary'"
+                  cdkOverlayOrigin
+                  #createBoardOverlay = "cdkOverlayOrigin"
+                  (click)="isOpenOverlayCreateBoard = !isOpenOverlayCreateBoard">
+                  Crear
+                </app-btn>
               </li>
             </ul>
           </div>
@@ -73,7 +78,7 @@
             type="button"
             class="flex rounded-full"
             aria-expanded="false"
-            (click)="isOpen = !isOpen"
+            (click)="isOpenOverlayAvatarMenu = !isOpenOverlayAvatarMenu"
             cdkOverlayOrigin
             #menuOverlay="cdkOverlayOrigin"
           >
@@ -89,8 +94,8 @@
     <ng-template
       cdkConnectedOverlay
       [cdkConnectedOverlayOrigin]="menuOverlay"
-      [cdkConnectedOverlayOpen]="isOpen"
-      (overlayOutsideClick)="isOpen = !isOpen"
+      [cdkConnectedOverlayOpen]="isOpenOverlayAvatarMenu"
+      (overlayOutsideClick)="isOpenOverlayAvatarMenu = !isOpenOverlayAvatarMenu"
     >
       <section class="bg-white flex flex-col items-start divide-y divide-gray-300 w-80 rounded shadow-lg mt-4 py-3 px-4 border border-gray-200 text-blue-950">
         <div class="flex flex-col space-y-4 w-full py-3 px-4">
@@ -171,6 +176,26 @@
               <button (click)="logOut()" class="block">Cerrar sesión</button>
             </li>
           </ul>
+        </div>
+      </section>
+    </ng-template>
+
+    <ng-template
+      cdkConnectedOverlay
+      [cdkConnectedOverlayOrigin]="createBoardOverlay"
+      [cdkConnectedOverlayOpen]="isOpenOverlayCreateBoard"
+      (overlayOutsideClick)="isOpenOverlayCreateBoard = !isOpenOverlayCreateBoard">
+      <section class="bg-white flex flex-col items-start w-80 rounded
+        shadow-lg mt-4 py-3 px-4 border border-gray-200 text-blue-950">
+        <header class="w-full text-center relative">
+          <span class="font-semibold text-gray-600 text-sm my-2">Crear tablero</span>
+          <button (click)="isOpenOverlayCreateBoard = !isOpenOverlayCreateBoard"
+            class="block text-sm text-gray-900 absolute right-3 top-1">
+            <fa-icon [icon]="faClose"></fa-icon>
+          </button>
+        </header>
+        <div class="w-full">
+          <app-board-form (closeOverlay)="close($event)"></app-board-form>
         </div>
       </section>
     </ng-template>
