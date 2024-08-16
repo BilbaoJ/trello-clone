@@ -2,11 +2,11 @@ import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '@shared/components/navbar/navbar.component';
 import { DragDropModule, CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { ToDo } from '@shared/models/todo.model';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faStar, faLock, faChartSimple, faChevronDown,
           faRocket, faBoltLightning, faFilter, faUserPlus,
-            faEllipsis, faPlus} from '@fortawesome/free-solid-svg-icons';
+            faEllipsis, faPlus, faClose} from '@fortawesome/free-solid-svg-icons';
 import {DialogModule, Dialog} from '@angular/cdk/dialog';
 import { TodoDialogComponent } from '@boards/components/todo-dialog/todo-dialog.component'
 import { ActivatedRoute } from '@angular/router';
@@ -15,11 +15,12 @@ import { Board } from '@shared/models/board.model';
 import { Card } from '@shared/models/card.model';
 import { List } from '@shared/models/list.model';
 import { CardsService } from '@services/cards.service';
+import { BtnComponent } from '@shared/components/btn/btn.component';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, DragDropModule, FontAwesomeModule, DialogModule],
+  imports: [CommonModule, NavbarComponent, DragDropModule, FontAwesomeModule, DialogModule, BtnComponent, ReactiveFormsModule],
   templateUrl: './board.component.html',
   styles: [
   `
@@ -38,6 +39,13 @@ import { CardsService } from '@services/cards.service';
 export default class BoardComponent {
 
   board: Board | null = null;
+  showCardForm: boolean = false;
+  titleInput = new FormControl<string>('', {
+    nonNullable: true,
+    validators: [
+      Validators.required,
+    ]
+  });
 
   faStar = faStar;
   faLock = faLock;
@@ -49,6 +57,7 @@ export default class BoardComponent {
   faUserPlus = faUserPlus;
   faEllipsis = faEllipsis;
   faPlus = faPlus;
+  faClose = faClose
 
   private route: ActivatedRoute = inject(ActivatedRoute);
   private boarsdService: BoardsService = inject(BoardsService);
@@ -125,5 +134,37 @@ export default class BoardComponent {
     .subscribe((cardUpdated) => {
       console.log(cardUpdated);
     })
+  }
+
+  openFormCard(list: List){
+    list.showCardForm = !list.showCardForm;
+    if (this.board?.lists) {
+      this.board.lists = this.board.lists.map(iteratorList => {
+        return{
+          ...iteratorList,
+          showCardForm: iteratorList.id === list.id
+        }
+      });
+    }
+  }
+
+  createCardForm(list: List){
+    const title = this.titleInput.value;
+    if (this.board) {
+      this.cardsService.createCard({
+        title,
+        listId: list.id,
+        boardId: this.board.id,
+        position: this.boarsdService.getPositionNewCard(list.cards)
+      }).subscribe(card => {
+        list.cards.push(card);
+        this.titleInput.setValue('');
+        list.showCardForm = false;
+      });
+    }
+  }
+
+  closeCardForm(list: List){
+    list.showCardForm = false;
   }
 }

@@ -8,6 +8,14 @@ export interface Card{
   list: List;
 }
 
+export interface CreateCardDTO {
+  title: string;
+  position: number;
+  description?: string;
+  listId: string;
+  boardId: string;
+}
+
 export interface UpdateCardDto {
   title?: string;
   description?: string;

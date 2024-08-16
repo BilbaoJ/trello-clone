@@ -73,6 +73,28 @@
               </div>
             }
           </div>
+          <div class="mt-5">
+            @if (!list.showCardForm) {
+              <app-btn color="grayLight" (click)="openFormCard(list)" >
+                <div class="flex justify-start items-start space-x-2">
+                  <fa-icon [icon]="faPlus"></fa-icon>
+                  <span>Añade una tarjeta</span>
+                </div>
+              </app-btn>
+            } @else {
+              <div class="w-full">
+                <textarea [formControl]="titleInput"
+                  placeholder="Introduce un nombre para esta tarjeta..."
+                  class="w-full shadow-md border-none resize-none focus:ring-transparent rounded-lg text-sm"></textarea>
+                <div class="flex space-x-2 justify-start">
+                  <app-btn color="primary" (click)="createCardForm(list)">Añadir tarjeta</app-btn>
+                  <button class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-2 py-1 rounded" (click)="closeCardForm(list)">
+                    <fa-icon [icon]="faClose"></fa-icon>
+                  </button>
+                </div>
+              </div>
+            }
+          </div>
         </div>
       }
       <button class="rounded-xl w-72 px-4 py-2 mr-3 shrink-0 bg-primary-300/50 text-white" (click)="addColumn()">
