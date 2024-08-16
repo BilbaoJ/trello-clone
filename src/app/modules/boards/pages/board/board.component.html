@@ -97,12 +97,31 @@
           </div>
         </div>
       }
-      <button class="rounded-xl w-72 px-4 py-2 mr-3 shrink-0 bg-primary-300/50 text-white" (click)="addColumn()">
-        <div class="flex justify-start items-center">
-          <fa-icon [icon]="faPlus"></fa-icon>
-          <span class="text-sm font-bold ml-2">Añade otra lista</span>
-        </div>
-      </button>
+      <div class="w-72">
+        @if (!showListForm) {
+          <button class="rounded-xl w-72 px-4 py-2 mr-3 shrink-0 bg-primary-300/50 text-white"
+            (click)="showListForm = !showListForm">
+            <div class="flex justify-start items-center">
+              <fa-icon [icon]="faPlus"></fa-icon>
+              <span class="text-sm font-bold ml-2">Añade otra lista</span>
+            </div>
+          </button>
+        } @else{
+          <div class="w-full bg-gray-200 rounded-xl p-2">
+            <input [formControl]="listInput"
+              placeholder="Introduce el nombre de la lista..."
+              class="w-full border-none rounded-lg text-sm mb-4">
+            <div class="flex space-x-2 justify-start">
+              <app-btn color="primary" (click)="addList()">Añadir lista</app-btn>
+              <button class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-2 py-1 rounded"
+                (click)="showListForm = !showListForm">
+                <fa-icon [icon]="faClose"></fa-icon>
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+
     </div>
   </div>
 </div>

@@ -16,6 +16,7 @@ import { Card } from '@shared/models/card.model';
 import { List } from '@shared/models/list.model';
 import { CardsService } from '@services/cards.service';
 import { BtnComponent } from '@shared/components/btn/btn.component';
+import { ListsService } from '@services/lists.service';
 
 @Component({
   selector: 'app-board',
@@ -40,7 +41,14 @@ export default class BoardComponent {
 
   board: Board | null = null;
   showCardForm: boolean = false;
+  showListForm: boolean = false;
   titleInput = new FormControl<string>('', {
+    nonNullable: true,
+    validators: [
+      Validators.required,
+    ]
+  });
+  listInput = new FormControl<string>('', {
     nonNullable: true,
     validators: [
       Validators.required,
@@ -62,6 +70,7 @@ export default class BoardComponent {
   private route: ActivatedRoute = inject(ActivatedRoute);
   private boarsdService: BoardsService = inject(BoardsService);
   private cardsService: CardsService = inject(CardsService);
+  private listsService: ListsService = inject(ListsService);
 
   constructor(private dialog:Dialog){}
 
@@ -99,12 +108,23 @@ export default class BoardComponent {
     }
   }
 
-  addColumn(){
-    // const newColumn = {
-    //   title: 'Nueva lista',
-    //   tasks: []
-    // };
-    // this.columns.update((columns) =>[...columns, newColumn]);
+  addList(){
+    const title = this.listInput.value;
+    if (this.board) {
+      this.listsService.create({
+        title,
+        boardId: this.board.id,
+        position: this.boarsdService.getPositionNewItem(this.board.lists)
+      })
+      .subscribe(list => {
+        this.board?.lists.push({
+          ...list,
+          cards: [],
+        });
+        this.showListForm = false;
+        this.listInput.setValue('');
+      });
+    }
   }
 
   openDialog(card: Card){
@@ -155,7 +175,7 @@ export default class BoardComponent {
         title,
         listId: list.id,
         boardId: this.board.id,
-        position: this.boarsdService.getPositionNewCard(list.cards)
+        position: this.boarsdService.getPositionNewItem(list.cards)
       }).subscribe(card => {
         list.cards.push(card);
         this.titleInput.setValue('');
