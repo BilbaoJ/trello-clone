@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { BackgroundComponent } from '@auth/components/background/background.component';
 import { FooterComponent } from '@auth/components/footer/footer.component';
@@ -26,9 +26,14 @@ import { RequestStatus } from '@shared/models/request-status.model';
 })
 export default class RecoveryComponent {
 
-  private authService = inject(AuthService);
-  private route = inject(ActivatedRoute);
-  private router = inject(Router);
+  private authService: AuthService = inject(AuthService);
+  private route: ActivatedRoute = inject(ActivatedRoute);
+  private router: Router = inject(Router);
+
+  status: WritableSignal<RequestStatus> = signal('init');
+  token: WritableSignal<string> = signal('');
+  showPassword = signal(false);
+
   form = new FormGroup({
     newPassword: new FormControl('', {
       nonNullable: true,
@@ -47,11 +52,9 @@ export default class RecoveryComponent {
   {
     validators: [ CustomValidators.MatchValidator('password', 'confirmPassword') ]
   });
-  status = signal<RequestStatus>('init');
-  token = signal('');
+
   faEye = faEye;
   faEyeSlash = faEyeSlash;
-  showPassword = signal(false);
 
   constructor(){
     this.route.queryParamMap.subscribe(params => {

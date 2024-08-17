@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '@shared/components/navbar/navbar.component';
 import { DragDropModule, CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
@@ -22,7 +22,14 @@ import { BACKGROUNDS, BACKGROUNDS_HEAD } from '@shared/models/colors.model';
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, DragDropModule, FontAwesomeModule, DialogModule, BtnComponent, ReactiveFormsModule],
+  imports: [CommonModule,
+            NavbarComponent,
+            DragDropModule,
+            FontAwesomeModule,
+            DialogModule,
+            BtnComponent,
+            ReactiveFormsModule
+          ],
   templateUrl: './board.component.html',
   styles: [
   `
@@ -40,11 +47,17 @@ import { BACKGROUNDS, BACKGROUNDS_HEAD } from '@shared/models/colors.model';
 })
 export default class BoardComponent {
 
+  private route: ActivatedRoute = inject(ActivatedRoute);
+  private boarsdService: BoardsService = inject(BoardsService);
+  private cardsService: CardsService = inject(CardsService);
+  private listsService: ListsService = inject(ListsService);
+
   board: Board | null = null;
   showCardForm: boolean = false;
   showListForm: boolean = false;
   colorBackgrounds = BACKGROUNDS;
   colorHeads = BACKGROUNDS_HEAD;
+
   titleInput = new FormControl<string>('', {
     nonNullable: true,
     validators: [
@@ -69,11 +82,6 @@ export default class BoardComponent {
   faEllipsis = faEllipsis;
   faPlus = faPlus;
   faClose = faClose
-
-  private route: ActivatedRoute = inject(ActivatedRoute);
-  private boarsdService: BoardsService = inject(BoardsService);
-  private cardsService: CardsService = inject(CardsService);
-  private listsService: ListsService = inject(ListsService);
 
   constructor(private dialog:Dialog){}
 

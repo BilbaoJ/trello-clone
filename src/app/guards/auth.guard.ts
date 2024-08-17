@@ -3,9 +3,9 @@ import { CanActivateFn, Router } from '@angular/router';
 import { TokenService } from '@services/token.service';
 
 export const authGuard: CanActivateFn = () => {
-  const tokenService = inject(TokenService);
-  const router = inject(Router);
-  const isValidToken = tokenService.isValidRefreshToken();
+  const tokenService: TokenService = inject(TokenService);
+  const router: Router = inject(Router);
+  const isValidToken: boolean = tokenService.isValidRefreshToken();
   if (!isValidToken) {
     router.navigate(['/login']);
     return false;

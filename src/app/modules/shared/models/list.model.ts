@@ -1,6 +1,6 @@
 import { Card } from "./card.model";
 
-export interface List{
+export interface List {
   id: string;
   title: string;
   position: number;
@@ -8,6 +8,6 @@ export interface List{
   showCardForm?: boolean;
 }
 
-export interface CreateListDto extends Omit<List, 'id' | 'cards'>{
+export interface CreateListDto extends Omit<List, 'id' | 'cards'> {
   boardId: string;
 }

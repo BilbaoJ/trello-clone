@@ -9,7 +9,9 @@ import { COLORS, Colors } from '@shared/models/colors.model';
   templateUrl: './card-color.component.html'
 })
 export class CardColorComponent {
+
   @Input() color: Colors = 'sky';
+
   mapColors = COLORS;
 
   get colors(){

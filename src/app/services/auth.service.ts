@@ -12,13 +12,11 @@ import { MeService } from './me.service';
 })
 export class AuthService {
 
-  private http = inject(HttpClient);
-  private tokenService = inject(TokenService);
-  private meService = inject(MeService);
-  apiUrl = environment.API_URL;
+  private http: HttpClient = inject(HttpClient);
+  private tokenService: TokenService = inject(TokenService);
+  private meService: MeService = inject(MeService);
+  apiUrl: string = environment.API_URL;
   user$ = new BehaviorSubject<User | null>(null);
-
-  constructor() { }
 
   getDataUser(){
     return this.user$.getValue();

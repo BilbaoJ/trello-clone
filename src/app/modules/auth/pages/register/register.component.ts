@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import { BackgroundComponent } from '@auth/components/background/background.component';
 import { FooterComponent } from '@auth/components/footer/footer.component';
@@ -28,9 +28,16 @@ import { CustomValidators } from '@utils/validators';
 })
 export default class RegisterComponent {
 
-  private authService = inject(AuthService);
-  private router = inject(Router);
-  private route = inject(ActivatedRoute);
+  private authService: AuthService = inject(AuthService);
+  private router: Router = inject(Router);
+  private route: ActivatedRoute = inject(ActivatedRoute);
+
+  status: WritableSignal<RequestStatus> = signal('init');
+  statusUser: WritableSignal<RequestStatus> = signal('init');
+  message: WritableSignal<string> = signal('');
+  showPassword: WritableSignal<boolean> = signal(false);
+  showRegister: WritableSignal<boolean> = signal(false);
+
   formUser = new FormGroup({
     email: new FormControl('', {
       nonNullable: true,
@@ -71,14 +78,9 @@ export default class RegisterComponent {
   {
     validators: [ CustomValidators.MatchValidator('password', 'confirmPassword') ]
   });
-  status = signal<RequestStatus>('init');
-  statusUser = signal<RequestStatus>('init');
-  message = signal('');
 
   faEye = faEye;
   faEyeSlash = faEyeSlash;
-  showPassword = signal(false);
-  showRegister = signal(false);
 
   constructor(){
     this.route.queryParamMap.subscribe(params => {

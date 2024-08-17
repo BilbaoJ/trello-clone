@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { NavbarComponent } from '../navbar/navbar.component';
+import { NavbarComponent } from '@shared/components/navbar/navbar.component';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '@services/auth.service';
 
@@ -12,7 +12,7 @@ import { AuthService } from '@services/auth.service';
 })
 export class LayoutComponent {
 
-  private authService = inject(AuthService);
+  private authService: AuthService = inject(AuthService);
 
   ngOnInit(){
     this.authService.getProfile()

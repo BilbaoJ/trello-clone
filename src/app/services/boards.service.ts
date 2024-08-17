@@ -13,9 +13,9 @@ import { backGroundColor, logoColor } from '@shared/state/navbar';
 })
 export class BoardsService {
 
-  private http = inject(HttpClient);
-  apiUrl = environment.API_URL;
-  bufferSpace = 65535;
+  private http: HttpClient = inject(HttpClient);
+  apiUrl: string = environment.API_URL;
+  bufferSpace: number = 65535;
 
   getBoard(id: Board['id']){
     return this.http.get<Board>(`${this.apiUrl}/api/v1/boards/${id}`, {

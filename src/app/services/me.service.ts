@@ -10,8 +10,8 @@ import { Board } from '@shared/models/board.model';
 })
 export class MeService {
 
-  private http = inject(HttpClient);
-  apiUrl = environment.API_URL;
+  private http: HttpClient = inject(HttpClient);
+  apiUrl: string = environment.API_URL;
 
   getProfile() {
     return this.http.get<User>(`${this.apiUrl}/api/v1/me/profile`,{

@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import { BackgroundComponent } from '@auth/components/background/background.component';
 import { FooterComponent } from '@auth/components/footer/footer.component';
@@ -27,9 +27,10 @@ import { RequestStatus } from '@shared/models/request-status.model';
 })
 export default class LoginComponent {
 
-  private authService = inject(AuthService);
-  private router = inject(Router);
-  private route = inject(ActivatedRoute);
+  private authService: AuthService = inject(AuthService);
+  private router: Router = inject(Router);
+  private route: ActivatedRoute = inject(ActivatedRoute);
+
   formUser = new FormGroup({
     email: new FormControl('', {
       nonNullable: true,
@@ -55,14 +56,14 @@ export default class LoginComponent {
       ]
     })
   });
-  status = signal<RequestStatus>('init');
-  statusUser = signal<RequestStatus>('init');
+  status: WritableSignal<RequestStatus> = signal('init');
+  statusUser: WritableSignal<RequestStatus> = signal('init');
+  showPassword = signal(false);
+  showLogin = signal(false);
 
   faEye = faEye;
   faEyeSlash = faEyeSlash;
   faPen = faPen;
-  showPassword = signal(false);
-  showLogin = signal(false);
 
   constructor(){
     this.route.queryParamMap.subscribe(params => {
@@ -76,7 +77,7 @@ export default class LoginComponent {
   doLogin() {
     if (this.form.valid) {
       this.status.set('loading');
-      const {email, password} = this.form.getRawValue();
+      const { email, password } = this.form.getRawValue();
       this.authService.login(email, password).subscribe({
         next: () => {
           this.status.set('success');
@@ -94,7 +95,7 @@ export default class LoginComponent {
   validateUser(){
     if (this.formUser.valid) {
       this.statusUser.set('loading');
-      const {email} = this.formUser.getRawValue();
+      const { email } = this.formUser.getRawValue();
       this.authService.isAvailable(email).subscribe({
         next: (rta) => {
           this.statusUser.set('success');

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { BtnComponent } from '../btn/btn.component';
+import { BtnComponent } from '@shared/components/btn/btn.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { BoardsService } from '@services/boards.service';
@@ -15,9 +15,7 @@ import { Router } from '@angular/router';
 })
 export class BoardFormComponent {
 
-  @Output() closeOverlay = new EventEmitter<boolean>();
-
-  faCheck = faCheck;
+  @Output() closeOverlay: EventEmitter<boolean> = new EventEmitter();
 
   private boardService = inject(BoardsService);
   private router = inject(Router);
@@ -36,6 +34,8 @@ export class BoardFormComponent {
       ]
     })
   });
+
+  faCheck = faCheck;
 
   doSave(){
     if (this.form.valid) {

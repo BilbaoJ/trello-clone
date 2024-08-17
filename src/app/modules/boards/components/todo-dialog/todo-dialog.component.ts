@@ -2,9 +2,9 @@ import { Component, Inject } from '@angular/core';
 import {DIALOG_DATA, DialogRef} from '@angular/cdk/dialog';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faClose, faCheckToSlot, faBars, faUser, faTag, faCheckSquare,
-          faClock, faEye, faPaperclip, faPager, faHardDrive, faPenRuler} from '@fortawesome/free-solid-svg-icons';
+          faClock, faEye, faPaperclip, faPager, faHardDrive, faPenRuler}
+        from '@fortawesome/free-solid-svg-icons';
 import { BtnComponent } from '@shared/components/btn/btn.component';
-import { ToDo } from '@shared/models/todo.model';
 import { Card } from '@shared/models/card.model';
 
 interface InputData {

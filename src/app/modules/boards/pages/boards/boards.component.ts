@@ -29,8 +29,10 @@ import { OverlayModule } from '@angular/cdk/overlay';
 })
 export default class BoardsComponent {
 
-  private meService = inject(MeService);
+  private meService: MeService = inject(MeService);
   boards: Board[] = [];
+  isOpenOverlayCreateBoard : boolean = false;
+
   faTrello = faTrello;
   faWaveSquare = faWaveSquare;
   faChevronDown = faChevronDown;
@@ -42,8 +44,6 @@ export default class BoardsComponent {
   faInfo = faInfo;
   faHeart = faHeart;
   faClose = faClose;
-
-  isOpenOverlayCreateBoard : boolean = false;
 
   ngOnInit(){
     this.getMeBoards();

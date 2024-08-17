@@ -4,7 +4,8 @@ import { Router, RouterLink } from '@angular/router';
 import { BtnComponent } from "@shared/components/btn/btn.component";
 import { OverlayModule } from '@angular/cdk/overlay';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faChevronDown, faChevronRight, faArrowUpRightFromSquare, faBell, faCircleQuestion, faClose } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown, faChevronRight, faArrowUpRightFromSquare,
+          faBell, faCircleQuestion, faClose } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '@services/auth.service';
 import { BoardFormComponent } from '../board-form/board-form.component';
 import { BTN_NAV_COLORS, Colors, NAVBAR_COLORS } from '@shared/models/colors.model';
@@ -24,13 +25,16 @@ import { backGroundColor, logoColor } from '@shared/state/navbar';
 })
 export class NavbarComponent {
 
+  private authService: AuthService = inject(AuthService);
+  private router: Router = inject(Router);
+
   logoColor: Signal<Colors> = computed(() => logoColor());
   bgColor: Signal<Colors> = computed(() => backGroundColor());
   colors = NAVBAR_COLORS;
   btnColors = BTN_NAV_COLORS;
-
-  private authService = inject(AuthService);
-  private router = inject(Router);
+  isOpenOverlayAvatarMenu : boolean = false;
+  isOpenOverlayCreateBoard : boolean = false;
+  user = this.authService.user$;
 
   faChevronDown = faChevronDown;
   faChevronRight = faChevronRight;
@@ -38,11 +42,6 @@ export class NavbarComponent {
   faBell = faBell;
   faCircleQuestion = faCircleQuestion;
   faClose = faClose;
-
-  isOpenOverlayAvatarMenu : boolean = false;
-  isOpenOverlayCreateBoard : boolean = false;
-  user = this.authService.user$;
-
 
   get bgColors(){
     const classes = this.colors[this.bgColor()];

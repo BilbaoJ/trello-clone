@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { BackgroundComponent } from '@auth/components/background/background.component';
@@ -24,7 +24,7 @@ import { RequestStatus } from '@shared/models/request-status.model';
 })
 export default class ForgotPasswordComponent {
 
-  private authService = inject(AuthService);
+  private authService: AuthService = inject(AuthService);
   form = new FormGroup({
     email: new FormControl('', {
       nonNullable: true,
@@ -34,8 +34,8 @@ export default class ForgotPasswordComponent {
       ]
     })
   });
-  status = signal<RequestStatus>('init');
-  emailSent = signal(false);
+  status: WritableSignal<RequestStatus> = signal('init');
+  emailSent: WritableSignal<boolean> = signal(false);
 
   sendLink(){
     if (this.form.valid) {
@@ -46,7 +46,7 @@ export default class ForgotPasswordComponent {
           this.status.set('success');
           this.emailSent.set(true);
         },
-        error: (error) => {
+        error: () => {
           this.status.set('failed');
         }
       });

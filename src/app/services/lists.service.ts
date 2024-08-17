@@ -9,8 +9,8 @@ import { CreateListDto, List } from '@shared/models/list.model';
 })
 export class ListsService {
 
-  private http = inject(HttpClient);
-  apiUrl = environment.API_URL;
+  private http: HttpClient = inject(HttpClient);
+  apiUrl: string = environment.API_URL;
 
   create(dto: CreateListDto){
     return this.http.post<List>(`${this.apiUrl}/api/v1/lists`, dto, {

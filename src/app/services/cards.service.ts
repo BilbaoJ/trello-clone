@@ -9,8 +9,8 @@ import { Card, CreateCardDTO, UpdateCardDto } from '@shared/models/card.model';
 })
 export class CardsService {
 
-  private http = inject(HttpClient);
-  apiUrl = environment.API_URL;
+  private http: HttpClient = inject(HttpClient);
+  apiUrl: string = environment.API_URL;
 
   createCard(dto: CreateCardDTO){
     return this.http.post<Card>(`${this.apiUrl}/api/v1/cards`, dto, {

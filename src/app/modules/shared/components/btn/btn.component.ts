@@ -12,13 +12,14 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 })
 export class BtnComponent {
 
-  @Input() disabled = false;
-  @Input() loading = false;
+  @Input() disabled: boolean = false;
+  @Input() loading: boolean = false;
   @Input() typeBtn: 'button' | 'reset' | 'submit' = 'button';
   @Input() color: Colors = 'primary';
-  faSpinner = faSpinner;
 
   mapColors = COLORS;
+
+  faSpinner = faSpinner;
 
   get colors(){
     const colors = this.mapColors[this.color];
