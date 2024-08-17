@@ -1,14 +1,24 @@
-<main class="p-6 bg-gray-100 relative rounded-xl shadow flex">
+<main class="p-6 bg-gray-100 relative rounded-xl shadow flex w-full">
   <button (click)="close()" type="button" class="absolute top-3 right-3 focus:outline-none p-2">
     <fa-icon [icon]="faClose"></fa-icon>
   </button>
   <section class="w-4/5">
-    <section class="flex flex-col mb-5">
-      <div class="flex space-x-2">
+    <section class="flex flex-col mb-5 w-full">
+      <div class="flex space-x-1">
         <fa-icon class="text-gray-800" [icon]="faPager"></fa-icon>
-        <div class="flex flex-col">
-          <h3 class="text-lg font-semibold text-gray-800">{{ card.title }}</h3>
-          <p class="text-sm text-gray-500">en la lista ToDo</p>
+        <div class="flex flex-col w-full">
+          <div class="text-lg font-semibold text-gray-800"
+            (click)="updateEditingMode(true)"
+            >
+            @if (editingMode) {
+              <input class="p-0 m-0 text-lg rounded border-none focus:ring-blue-500 focus:ring w-full pl-2" type="text"
+                [value]="card.title"
+                (keydown.enter)="updateTitle($event)">
+            } @else{
+              <p class="pl-2">{{ card.title }}</p>
+            }
+          </div>
+          <p class="text-sm text-gray-500">en la lista {{ listName }} </p>
         </div>
       </div>
       <div class="flex flex-col space-y-2 my-4 pl-6">

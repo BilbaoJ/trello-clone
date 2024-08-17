@@ -143,15 +143,17 @@ export default class BoardComponent {
     }
   }
 
-  openDialog(card: Card){
+  openDialog(card: Card, listTitle: List['title']){
     const dialogRef = this.dialog.open(TodoDialogComponent,{
-      minWidth: '300px',
+      minWidth: '50%',
       maxWidth: '50%',
       autoFocus: false,
       data: {
-        card
+        card,
+        listTitle
       }
     });
+
     dialogRef.closed.subscribe(output => {
       console.log(output);
 
@@ -169,9 +171,7 @@ export default class BoardComponent {
 
   private updateCard(card: Card, position: number, listId: string | number){
     this.cardsService.update(card.id, { position, listId })
-    .subscribe((cardUpdated) => {
-      console.log(cardUpdated);
-    })
+    .subscribe((cardUpdated) => {})
   }
 
   openFormCard(list: List){
