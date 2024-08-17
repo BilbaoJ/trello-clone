@@ -1,16 +1,17 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Output, signal, WritableSignal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BtnComponent } from '@shared/components/btn/btn.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { BoardsService } from '@services/boards.service';
-import { Colors } from '@shared/models/colors.model';
+import { BACKGROUNDS, Colors } from '@shared/models/colors.model';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-board-form',
   standalone: true,
-  imports: [ReactiveFormsModule, BtnComponent, FontAwesomeModule],
+  imports: [CommonModule, ReactiveFormsModule, BtnComponent, FontAwesomeModule],
   templateUrl: './board-form.component.html',
 })
 export class BoardFormComponent {
@@ -19,6 +20,8 @@ export class BoardFormComponent {
 
   private boardService = inject(BoardsService);
   private router = inject(Router);
+  private background: WritableSignal<Colors> = signal('sky');
+  colorBackgrounds = BACKGROUNDS;
 
   form = new FormGroup({
     title: new FormControl('', {
@@ -48,6 +51,15 @@ export class BoardFormComponent {
     }else{
       this.form.markAllAsTouched();
     }
+  }
+
+  changeColor(color: Colors){
+    this.background.set(color);
+  }
+
+  get color(){
+    const classes = this.colorBackgrounds[this.background()];
+    return classes ? classes : {};
   }
 
 }

@@ -1,5 +1,8 @@
 <form [formGroup]="form" novalidate class="space-y-4" (ngSubmit)="doSave()">
-  <div>
+  <div class="flex flex-col">
+    <figure class="self-center p-2 rounded" [ngClass]="color">
+      <img src="/assets/icons/svg/board.svg" alt="board">
+    </figure>
     <p class="font-bold text-xs text-gray-700 mb-2">Fondo</p>
     <ul class="flex flex-wrap space-x-2">
       <li class="flex items-center  ">
@@ -10,6 +13,7 @@
           name="backgroundColor"
           formControlName="backgroundColor"
           class="hidden peer"
+          (click)="changeColor('red')"
         />
         <label
           for="red-radio"
@@ -27,6 +31,7 @@
           name="backgroundColor"
           formControlName="backgroundColor"
           class="hidden peer"
+          (click)="changeColor('green')"
         />
         <label
           for="green-radio"
@@ -44,6 +49,7 @@
           name="backgroundColor"
           formControlName="backgroundColor"
           class="hidden peer"
+          (click)="changeColor('yellow')"
         />
         <label
           for="yellow-radio"
@@ -61,6 +67,7 @@
           name="backgroundColor"
           formControlName="backgroundColor"
           class="hidden peer"
+          (click)="changeColor('violet')"
         />
         <label
           for="violet-radio"
@@ -78,6 +85,7 @@
           name="backgroundColor"
           formControlName="backgroundColor"
           class="hidden peer"
+          (click)="changeColor('sky')"
         />
         <label
           for="sky-radio"
@@ -95,6 +103,7 @@
           name="backgroundColor"
           formControlName="backgroundColor"
           class="hidden peer"
+          (click)="changeColor('gray')"
         />
         <label
           for="gray-radio"
