@@ -7,7 +7,7 @@ import { faClose, faCheckToSlot, faBars, faUser, faTag, faCheckSquare,
 import { BtnComponent } from '@shared/components/btn/btn.component';
 import { Card } from '@shared/models/card.model';
 import { CommonModule } from '@angular/common';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { CardsService } from '@services/cards.service';
 
 interface InputData {
@@ -22,7 +22,10 @@ interface OutputData {
 @Component({
   selector: 'app-todo-dialog',
   standalone: true,
-  imports: [ CommonModule, FontAwesomeModule, BtnComponent, ReactiveFormsModule],
+  imports: [CommonModule,
+            FontAwesomeModule,
+            BtnComponent,
+            ReactiveFormsModule],
   templateUrl: './todo-dialog.component.html'
 })
 export class TodoDialogComponent {
@@ -31,7 +34,9 @@ export class TodoDialogComponent {
 
   card: Card;
   listName: string;
-  editingMode: boolean = false;
+  editingModeTitle: boolean = false;
+  editingModeDescription: boolean = false;
+  description = new FormControl('');
 
   faClose = faClose;
   faCheckToSlot = faCheckToSlot;
@@ -52,6 +57,7 @@ export class TodoDialogComponent {
   ){
     this.card = data.card;
     this.listName = data.listTitle;
+    this.description.setValue(this.card.description);
   }
 
   close(){
@@ -61,7 +67,11 @@ export class TodoDialogComponent {
   }
 
   updateEditingMode(state: boolean){
-    this.editingMode = state;
+    this.editingModeTitle = state;
+  }
+
+  updateEditingModeDescription(state: boolean){
+    this.editingModeDescription = state;
   }
 
   updateTitle(event: Event){
@@ -70,10 +80,22 @@ export class TodoDialogComponent {
     if (newTitle !== '') {
       this.cardsService.update(this.card.id, { title: newTitle })
       .subscribe((cardUpdated) => {
-        this.card.title = cardUpdated.title
+        this.card.title = cardUpdated.title;
       });
       this.updateEditingMode(false);
     }
+  }
+
+  updateDescription(){
+    let newDescription = this.description.value;
+    if (newDescription === null) {
+      newDescription = '';
+    }
+    this.cardsService.update(this.card.id, { description: newDescription })
+    .subscribe((cardUpdated) => {
+      this.card.description = cardUpdated.description;
+    });
+    this.updateEditingModeDescription(false);
   }
 
 }

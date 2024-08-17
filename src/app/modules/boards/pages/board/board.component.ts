@@ -154,10 +154,7 @@ export default class BoardComponent {
       }
     });
 
-    dialogRef.closed.subscribe(output => {
-      console.log(output);
-
-    })
+    dialogRef.closed.subscribe(output => {})
   }
 
   private getBoard(id: string){
