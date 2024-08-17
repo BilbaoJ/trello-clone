@@ -14,16 +14,19 @@ export const boardsRoutes: Routes = [
       },
       {
         path:'boards',
+        title: 'Tableros | Trello clone',
         canActivate: [ authGuard ],
         loadComponent: () => import('../boards/pages/boards/boards.component')
       },
       {
         path:'boards/:id',
+        title: 'Tablero | Trello clone',
         canActivate: [ authGuard ],
         loadComponent: () => import('../boards/pages/board/board.component')
       },
       {
         path: 'users',
+        title: 'Usuarios',
         canActivate: [ authGuard ],
         loadChildren: () => import('../users/users.routes').then((m) => m.usersRoutes),
       },
