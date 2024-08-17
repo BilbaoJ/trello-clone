@@ -17,6 +17,7 @@ import { List } from '@shared/models/list.model';
 import { CardsService } from '@services/cards.service';
 import { BtnComponent } from '@shared/components/btn/btn.component';
 import { ListsService } from '@services/lists.service';
+import { BACKGROUNDS, BACKGROUNDS_HEAD } from '@shared/models/colors.model';
 
 @Component({
   selector: 'app-board',
@@ -42,6 +43,8 @@ export default class BoardComponent {
   board: Board | null = null;
   showCardForm: boolean = false;
   showListForm: boolean = false;
+  colorBackgrounds = BACKGROUNDS;
+  colorHeads = BACKGROUNDS_HEAD;
   titleInput = new FormControl<string>('', {
     nonNullable: true,
     validators: [
@@ -81,6 +84,11 @@ export default class BoardComponent {
         this.getBoard(id);
       }
     })
+  }
+
+  ngOnDestroy(): void{
+    this.boarsdService.setBackGroundColor('white');
+    this.boarsdService.setLogoColor('neutral');
   }
 
   drop(event: CdkDragDrop<Card[]>){
@@ -146,6 +154,8 @@ export default class BoardComponent {
     this.boarsdService.getBoard(id)
     .subscribe(board => {
       this.board = board;
+      this.boarsdService.setBackGroundColor(board.backgroundColor);
+      this.boarsdService.setLogoColor('white');
     });
   }
 
@@ -186,5 +196,21 @@ export default class BoardComponent {
 
   closeCardForm(list: List){
     list.showCardForm = false;
+  }
+
+  get colors() {
+    if (this.board) {
+      const classes = this.colorBackgrounds[this.board.backgroundColor];
+      return classes ? classes : {};
+    }
+    return {}
+  }
+
+  get colorsHead() {
+    if (this.board) {
+      const classes = this.colorHeads[this.board.backgroundColor];
+      return classes ? classes : {};
+    }
+    return {}
   }
 }

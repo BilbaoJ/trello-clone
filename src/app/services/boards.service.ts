@@ -6,6 +6,7 @@ import { Board } from '@shared/models/board.model';
 import { Card } from '@shared/models/card.model';
 import { Colors } from '@shared/models/colors.model';
 import { List } from '@shared/models/list.model';
+import { backGroundColor, logoColor } from '@shared/state/navbar';
 
 @Injectable({
   providedIn: 'root'
@@ -60,5 +61,13 @@ export class BoardsService {
     const lastIndex = items.length - 1;
     const onBottomPosition = items[lastIndex].position;
     return onBottomPosition + this.bufferSpace;
+  }
+
+  setBackGroundColor(color: Colors){
+    backGroundColor.set(color);
+  }
+
+  setLogoColor(color: 'neutral' | 'white'){
+    logoColor.set(color);
   }
 }

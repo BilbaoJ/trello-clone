@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, computed, inject, Input, Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { BtnComponent } from "@shared/components/btn/btn.component";
@@ -7,6 +7,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faChevronDown, faChevronRight, faArrowUpRightFromSquare, faBell, faCircleQuestion, faClose } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '@services/auth.service';
 import { BoardFormComponent } from '../board-form/board-form.component';
+import { BTN_NAV_COLORS, Colors, NAVBAR_COLORS } from '@shared/models/colors.model';
+import { backGroundColor, logoColor } from '@shared/state/navbar';
 
 @Component({
     selector: 'app-navbar',
@@ -22,9 +24,10 @@ import { BoardFormComponent } from '../board-form/board-form.component';
 })
 export class NavbarComponent {
 
-  @Input() textColor: string = 'gray';
-  @Input() bgColor: string = 'white';
-  @Input() logoColor: string = 'neutral';
+  logoColor: Signal<Colors> = computed(() => logoColor());
+  bgColor: Signal<Colors> = computed(() => backGroundColor());
+  colors = NAVBAR_COLORS;
+  btnColors = BTN_NAV_COLORS;
 
   private authService = inject(AuthService);
   private router = inject(Router);
@@ -40,30 +43,19 @@ export class NavbarComponent {
   isOpenOverlayCreateBoard : boolean = false;
   user = this.authService.user$;
 
-  get colorText(){
-    return {
-      'text-gray-600': this.textColor === 'gray',
-      'text-white': this.textColor === 'white',
-    };
-  }
 
   get bgColors(){
-    return {
-      'bg-white': this.bgColor === 'white',
-      'bg-primary-800': this.bgColor === 'blue',
-      'border-b-2 border-gray-200': this.bgColor === "white"
-    };
+    const classes = this.colors[this.bgColor()];
+    return classes ? classes : {};
   }
 
   get hover(){
-    return {
-      'hover:bg-gray-300': this.bgColor === 'white',
-      'hover:bg-primary-500': this.bgColor === 'blue',
-    }
+    const classes = this.btnColors[this.bgColor()];
+    return classes ? classes : {};
   }
 
   get logo(){
-    return `/assets/logo/images/logo-gradient-${this.logoColor}-trello.png`
+    return `/assets/logo/images/logo-gradient-${this.logoColor()}-trello.png`
   }
 
   logOut(){

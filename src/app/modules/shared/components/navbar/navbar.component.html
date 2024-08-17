@@ -1,6 +1,6 @@
 @if (user | async; as user) {
   <ng-container>
-    <nav class="px-6" [ngClass] = "bgColors">
+    <nav class="px-6 mix-blend-normal" [ngClass] = "bgColors">
       <div class="flex flex-wrap justify-between items-center">
         <div class="flex items-center space-x-4">
           <figure class="w-20">
@@ -14,7 +14,7 @@
           <div class="flex items-center">
             <ul
               class="flex items-center space-x-2 text-sm font-semibold"
-              [ngClass] = "colorText"
+              [ngClass] = "bgColors"
             >
               <li class="p-2">
                 <a
@@ -23,7 +23,7 @@
                   [ngClass] = "hover"
                 >
                   <span>Espacios de trabajo</span>
-                  <fa-icon [ngClass] = "colorText" [icon]="faChevronDown"></fa-icon>
+                  <fa-icon [ngClass] = "hover" [icon]="faChevronDown"></fa-icon>
                 </a>
               </li>
               <li class="p-2">
@@ -33,7 +33,7 @@
                   [ngClass] = "hover"
                 >
                   <span>Reciente</span>
-                  <fa-icon [ngClass] = "colorText" [icon]="faChevronDown"></fa-icon>
+                  <fa-icon [ngClass] = "hover" [icon]="faChevronDown"></fa-icon>
                 </a>
               </li>
               <li class="p-2">
@@ -43,7 +43,7 @@
                   [ngClass] = "hover"
                 >
                   <span>Marcado</span>
-                  <fa-icon [ngClass] = "colorText" [icon]="faChevronDown"></fa-icon>
+                  <fa-icon [ngClass] = "hover" [icon]="faChevronDown"></fa-icon>
                 </a>
               </li>
               <li class="p-2">
@@ -53,15 +53,15 @@
                   [ngClass] = "hover"
                 >
                   <span>Plantillas</span>
-                  <fa-icon [ngClass] = "colorText" [icon]="faChevronDown"></fa-icon>
+                  <fa-icon [ngClass] = "hover" [icon]="faChevronDown"></fa-icon>
                 </a>
               </li>
               <li class="p-1">
-                <app-btn [typeBtn]="'button'" [color]="'primary'"
+                <app-btn typeBtn="button" [color]="bgColor()"
                   cdkOverlayOrigin
                   #createBoardOverlay = "cdkOverlayOrigin"
                   (click)="isOpenOverlayCreateBoard = !isOpenOverlayCreateBoard">
-                  Crear
+                  <span>Crear</span>
                 </app-btn>
               </li>
             </ul>
@@ -69,10 +69,10 @@
         </div>
         <div class="flex items-center space-x-4">
           <button type="button">
-            <fa-icon [ngClass]="colorText" [icon]="faBell"></fa-icon>
+            <fa-icon [ngClass]="hover" [icon]="faBell" class="p-1 rounded-full"></fa-icon>
           </button>
           <button>
-            <fa-icon [ngClass]="colorText" [icon]="faCircleQuestion"></fa-icon>
+            <fa-icon [ngClass]="hover" [icon]="faCircleQuestion" class="p-1 rounded-full"></fa-icon>
           </button>
           <button
             type="button"
