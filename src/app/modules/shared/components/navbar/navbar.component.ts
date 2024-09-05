@@ -43,6 +43,11 @@ export class NavbarComponent {
   faCircleQuestion = faCircleQuestion;
   faClose = faClose;
 
+  ngOnInit(){
+    console.log('avatar: ', this.user.value?.name);
+
+  }
+
   get bgColors(){
     const classes = this.colors[this.bgColor()];
     return classes ? classes : {};
@@ -54,7 +59,7 @@ export class NavbarComponent {
   }
 
   get logo(){
-    return `/assets/logo/images/logo-gradient-${this.logoColor()}-trello.png`
+    return `/assets/logo/images/icon-gradient-${this.logoColor()}-trello.png`
   }
 
   logOut(){

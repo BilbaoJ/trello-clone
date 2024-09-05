@@ -4,11 +4,13 @@
       <div class="flex flex-wrap justify-between items-center">
         <div class="flex items-center space-x-4">
           <figure class="w-20">
-            <a routerLink="/">
+            <a class="flex" routerLink="/">
               <img
+                class="h-6"
                 [src]="logo"
                 alt="logo trello"
               />
+              <span class="font-bold">Tasky</span>
             </a>
           </figure>
           <div class="flex items-center">
@@ -84,7 +86,7 @@
           >
             <img
               class="w-6 h-6 rounded-full"
-              [src]="user?.avatar"
+              src="https://picsum.photos/400/400"
               alt="user photo"
             />
           </button>
@@ -103,7 +105,7 @@
           <div class="flex flex-col space-y-4">
             <header class="flex space-x-4">
               <figure class="w-12 h-12">
-                <img class="rounded-full" [src]="user?.avatar" alt="user photo">
+                <img class="rounded-full" src="https://picsum.photos/400/400" alt="user photo">
               </figure>
               <div class="flex flex-col">
                 <p class="text-base">{{ user?.name }}</p>
@@ -126,7 +128,7 @@
           </div>
         </div>
         <div class="py-3 px-4 w-full">
-          <span class="font-bold text-gray-500 text-xs my-2">TRELLO</span>
+          <span class="font-bold text-gray-500 text-xs my-2">TASKY</span>
           <div class="pt-3">
             <ul class="flex flex-col space-y-4 text-sm">
               <li>

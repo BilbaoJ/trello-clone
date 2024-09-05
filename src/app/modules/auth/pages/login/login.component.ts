@@ -18,4 +18,8 @@ import { LoginFormComponent } from '@auth/components/login-form/login-form.compo
 })
 export default class LoginComponent {
 
+  constructor(){
+    alert('esto es una alerta');
+  }
+
 }
