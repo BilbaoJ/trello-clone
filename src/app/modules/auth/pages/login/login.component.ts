@@ -4,6 +4,7 @@ import { FooterComponent } from '@auth/components/footer/footer.component';
 import { HeaderComponent } from '@auth/components/header/header.component';
 import { CommonModule } from '@angular/common';
 import { LoginFormComponent } from '@auth/components/login-form/login-form.component';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,14 @@ import { LoginFormComponent } from '@auth/components/login-form/login-form.compo
 export default class LoginComponent {
 
   constructor(){
-    alert('esto es una alerta');
+    this.warning();
   }
 
+  warning(){
+    Swal.fire({
+      text: 'Este es un proyecto personal para estudiar Angular inspirado en Trello. Se utiliza únicamente con fines educativos.',
+      icon: 'warning',
+      confirmButtonText: 'Entendido'
+    })
+  }
 }
